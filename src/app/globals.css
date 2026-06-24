@@ -1,0 +1,289 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  /* Colors - Premium Slate & Electric Cyan/Blue */
+  --primary-navy: #0b132b;
+  --primary-navy-rgb: 11, 19, 43;
+  --secondary-blue: #3a86ff;
+  --secondary-blue-rgb: 58, 134, 255;
+  --accent-cyan: #00f5d4;
+  --accent-cyan-rgb: 0, 245, 212;
+  --accent-purple: #7209b7;
+  --accent-light: #f0f7ff;
+  
+  /* Backgrounds */
+  --bg-main: #fafbff;
+  --bg-gradient: radial-gradient(circle at top left, #fafbff 0%, #f4f7fd 60%, #eef3fc 100%);
+  --bg-glass: rgba(255, 255, 255, 0.75);
+  --bg-glass-card: rgba(255, 255, 255, 0.85);
+  
+  /* Text */
+  --text-primary: #1c2541;
+  --text-secondary: #4a5568;
+  --text-muted: #718096;
+  
+  /* Gradients */
+  --brand-gradient: linear-gradient(135deg, var(--secondary-blue) 0%, #00b4d8 50%, var(--accent-cyan) 100%);
+  --brand-gradient-reverse: linear-gradient(135deg, var(--accent-cyan) 0%, #00b4d8 50%, var(--secondary-blue) 100%);
+  --text-gradient: linear-gradient(135deg, var(--primary-navy) 20%, #1c2541 60%, var(--secondary-blue) 100%);
+  --glow-gradient: radial-gradient(circle, rgba(58, 134, 255, 0.15) 0%, rgba(0, 245, 212, 0.05) 50%, transparent 100%);
+  
+  /* Layout utilities */
+  --border-color: rgba(226, 232, 240, 0.8);
+  --border-glass: rgba(255, 255, 255, 0.65);
+  --border-glow: rgba(58, 134, 255, 0.12);
+  
+  /* Shadows */
+  --shadow-sm: 0 4px 12px rgba(11, 19, 43, 0.02);
+  --shadow-md: 0 16px 36px rgba(11, 19, 43, 0.04);
+  --shadow-lg: 0 24px 56px rgba(11, 19, 43, 0.08);
+  --shadow-glow: 0 0 30px rgba(58, 134, 255, 0.2);
+  
+  /* Border Radius */
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --radius-xl: 36px;
+  
+  /* Fonts */
+  --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Transitions */
+  --transition-fast: 0.15s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --transition-smooth: 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-bounce: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Global resets */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-main);
+  background-image: var(--bg-gradient);
+  color: var(--text-primary);
+  min-height: 100%;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Grid & Section Layouts */
+section {
+  padding: 120px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: 80px 20px;
+  }
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--primary-navy);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+p {
+  color: var(--text-secondary);
+  line-height: 1.65;
+  font-size: 1.125rem;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--primary-navy-rgb), 0.08);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--secondary-blue-rgb), 0.25);
+}
+
+/* Glassmorphism Styles */
+.glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-glass);
+  box-shadow: var(--shadow-md);
+}
+
+.text-gradient {
+  background: var(--text-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all var(--transition-smooth);
+  border: none;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  letter-spacing: -0.01em;
+}
+
+.btn-primary {
+  background: var(--brand-gradient);
+  color: white;
+  box-shadow: 0 8px 24px rgba(var(--secondary-blue-rgb), 0.25);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--brand-gradient-reverse);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity var(--transition-smooth);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(var(--secondary-blue-rgb), 0.35);
+}
+
+.btn-primary:hover::before {
+  opacity: 1;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--primary-navy);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  background: white;
+  border-color: rgba(var(--secondary-blue-rgb), 0.3);
+  box-shadow: var(--shadow-md);
+}
+
+/* Badge Styles */
+.badge-promo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(58, 134, 255, 0.05);
+  border: 1px solid rgba(58, 134, 255, 0.1);
+  border-radius: 99px;
+  padding: 8px 20px;
+  width: fit-content;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--secondary-blue);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 24px;
+  backdrop-filter: blur(8px);
+}
+
+.badge-bullet {
+  color: var(--accent-cyan);
+  animation: pulse-slow 2s infinite;
+}
+
+/* Animations */
+@keyframes pulse-slow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Interactive animations and highlights */
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glow-orb-primary {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(var(--secondary-blue-rgb), 0.15) 0%, transparent 70%);
+}
+
+.glow-orb-accent {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(var(--accent-cyan-rgb), 0.12) 0%, transparent 70%);
+}
