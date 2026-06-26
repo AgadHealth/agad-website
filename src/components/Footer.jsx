@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Activity, Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 
 const LAUNCH_DATE = new Date("2026-09-01T00:00:00");
 
@@ -44,7 +44,7 @@ export default function Footer() {
     <footer id="download" className="footer">
       {/* Coming Soon + Waitlist Banner */}
       <div className="download-cta-banner">
-        {/* Left: copy + form */}
+        {/* Content only — no right side stat cards */}
         <div className="cta-content">
           <div className="cs-badge">
             <span className="cs-badge-dot" />
@@ -92,25 +92,6 @@ export default function Footer() {
             </form>
           )}
         </div>
-
-        {/* Right: decorative stats */}
-        <div className="cta-side">
-          <div className="stat-card">
-            <span className="stat-icon">⚡</span>
-            <strong>2 Min</strong>
-            <span>Doctor Response</span>
-          </div>
-          <div className="stat-card">
-            <span className="stat-icon">🔒</span>
-            <strong>HIPAA</strong>
-            <span>Compliant</span>
-          </div>
-          <div className="stat-card">
-            <span className="stat-icon">★</span>
-            <strong>4.9</strong>
-            <span>Early Access Rating</span>
-          </div>
-        </div>
       </div>
 
       {/* Main Footer Links & Info */}
@@ -119,13 +100,11 @@ export default function Footer() {
           {/* Brand Info */}
           <div className="footer-brand">
             <div className="footer-logo">
-              <div className="logo-icon-bg">
-                <Activity className="logo-icon" size={18} />
-              </div>
+              <img src="/logo.png" alt="Agad logo" className="footer-logo-img" />
               <span className="logo-text">Agad</span>
             </div>
             <p className="brand-tagline">
-              Instantly connecting you to medical expertise. Monitor vitals, consult doctors, and manage schedules securely.
+              Your health, in your hands. Agad connects you to certified doctors, tracks your vitals, and keeps you on schedule — all from one clean app.
             </p>
           </div>
 
@@ -133,7 +112,7 @@ export default function Footer() {
           <div className="footer-column">
             <h4>Application</h4>
             <a href="#features">Features</a>
-            <a href="#showcase">Walkthrough</a>
+            <a href="#showcase">Waitlist</a>
             <a href="#how-it-works">How It Works</a>
           </div>
 
@@ -148,19 +127,19 @@ export default function Footer() {
           {/* Contact */}
           <div className="footer-column">
             <h4>Contact Info</h4>
-            <span className="contact-item"><Phone size={14} /> +1 (555) 304-AGAD</span>
-            <span className="contact-item"><Mail size={14} /> support@agad.health</span>
-            <span className="contact-item"><MapPin size={14} /> San Francisco, CA</span>
+            <span className="contact-item"><Mail size={14} /> hello@agad.health</span>
+            <span className="contact-item"><MapPin size={14} /> Bengaluru, India</span>
+            <span className="contact-item"><Phone size={14} /> +91 98765 43210</span>
           </div>
         </div>
 
         {/* Bottom row copyrights */}
         <div className="footer-bottom">
-          <p>© 2026 Agad Inc. All rights reserved.</p>
+          <p>© 2026 Agad Health. All rights reserved.</p>
           <div className="social-links">
-            <a href="#download">Twitter</a>
-            <a href="#download">LinkedIn</a>
-            <a href="#download">Instagram</a>
+            <a href="https://twitter.com/agadhealth" target="_blank" rel="noopener noreferrer">Twitter</a>
+            <a href="https://linkedin.com/company/agadhealth" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://instagram.com/agad.health" target="_blank" rel="noopener noreferrer">Instagram</a>
           </div>
         </div>
       </div>
@@ -179,15 +158,13 @@ export default function Footer() {
           max-width: 1200px;
           margin: 0 auto;
           background: linear-gradient(135deg, #0c1e46 0%, #0a1a3a 60%, #071124 100%);
-          border: 1px solid rgba(58, 134, 255, 0.18);
+          border: 1px solid rgba(99, 102, 241, 0.18);
           border-radius: 32px;
           padding: 56px 60px;
           display: flex;
           align-items: center;
-          justify-content: space-between;
           transform: translateY(-50px);
-          box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(58,134,255,0.08) inset;
-          gap: 48px;
+          box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(99,102,241,0.08) inset;
           position: relative;
           overflow: hidden;
         }
@@ -198,7 +175,7 @@ export default function Footer() {
           top: -80px; left: -80px;
           width: 400px; height: 400px;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(58,134,255,0.12) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(99,102,241,0.14) 0%, transparent 70%);
           pointer-events: none;
         }
 
@@ -208,7 +185,7 @@ export default function Footer() {
           bottom: -60px; right: -60px;
           width: 350px; height: 350px;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(0,245,212,0.08) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(0,229,255,0.08) 0%, transparent 70%);
           pointer-events: none;
         }
 
@@ -216,6 +193,7 @@ export default function Footer() {
           flex: 1;
           position: relative;
           z-index: 1;
+          max-width: 640px;
         }
 
         /* Badge */
@@ -223,13 +201,13 @@ export default function Footer() {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          background: rgba(58,134,255,0.12);
-          border: 1px solid rgba(58,134,255,0.25);
+          background: rgba(99,102,241,0.12);
+          border: 1px solid rgba(99,102,241,0.25);
           border-radius: 999px;
           padding: 6px 16px;
           font-size: 0.8rem;
           font-weight: 700;
-          color: #60a5fa;
+          color: #a5b4fc;
           letter-spacing: 0.03em;
           margin-bottom: 20px;
         }
@@ -238,8 +216,8 @@ export default function Footer() {
           width: 7px;
           height: 7px;
           border-radius: 50%;
-          background: #3a86ff;
-          box-shadow: 0 0 8px rgba(58,134,255,0.8);
+          background: #6366f1;
+          box-shadow: 0 0 8px rgba(99,102,241,0.8);
           animation: pulse-dot 1.5s ease-in-out infinite;
         }
 
@@ -282,7 +260,7 @@ export default function Footer() {
 
         .cd-box {
           background: rgba(255,255,255,0.06);
-          border: 1px solid rgba(58,134,255,0.2);
+          border: 1px solid rgba(99,102,241,0.2);
           border-radius: 12px;
           width: 68px;
           height: 64px;
@@ -312,7 +290,7 @@ export default function Footer() {
         .cd-sep {
           font-size: 1.5rem;
           font-weight: 800;
-          color: rgba(58,134,255,0.5);
+          color: rgba(99,102,241,0.5);
           margin: 0 2px;
           padding-bottom: 4px;
         }
@@ -329,15 +307,15 @@ export default function Footer() {
           display: flex;
           gap: 8px;
           background: rgba(255,255,255,0.06);
-          border: 1px solid rgba(58,134,255,0.2);
+          border: 1px solid rgba(99,102,241,0.2);
           border-radius: 999px;
           padding: 6px 6px 6px 20px;
           transition: border-color 0.2s, box-shadow 0.2s;
         }
 
         .input-wrap:focus-within {
-          border-color: rgba(58,134,255,0.5);
-          box-shadow: 0 0 0 3px rgba(58,134,255,0.08);
+          border-color: rgba(99,102,241,0.5);
+          box-shadow: 0 0 0 3px rgba(99,102,241,0.08);
         }
 
         .notify-input {
@@ -356,7 +334,7 @@ export default function Footer() {
         }
 
         .notify-btn {
-          background: linear-gradient(135deg, #3a86ff 0%, #00b4d8 100%);
+          background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
           color: white;
           border: none;
           border-radius: 999px;
@@ -417,55 +395,6 @@ export default function Footer() {
           flex-shrink: 0;
         }
 
-        /* Right side stat cards */
-        .cta-side {
-          display: flex;
-          flex-direction: column;
-          gap: 16px;
-          flex-shrink: 0;
-          position: relative;
-          z-index: 1;
-        }
-
-        .stat-card {
-          background: rgba(255,255,255,0.05);
-          border: 1px solid rgba(58,134,255,0.14);
-          border-radius: 18px;
-          padding: 18px 22px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 4px;
-          width: 140px;
-          text-align: center;
-          backdrop-filter: blur(10px);
-          transition: background 0.25s, border-color 0.25s;
-        }
-
-        .stat-card:hover {
-          background: rgba(58,134,255,0.08);
-          border-color: rgba(58,134,255,0.3);
-        }
-
-        .stat-icon {
-          font-size: 1.3rem;
-          margin-bottom: 4px;
-        }
-
-        .stat-card strong {
-          font-size: 1.4rem;
-          font-weight: 800;
-          color: white;
-          letter-spacing: -0.03em;
-        }
-
-        .stat-card span {
-          font-size: 0.72rem;
-          color: #64748b;
-          font-weight: 600;
-          line-height: 1.3;
-        }
-
         /* Footer Links */
         .footer-links-container {
           max-width: 1200px;
@@ -493,15 +422,14 @@ export default function Footer() {
           gap: 10px;
         }
 
-        .logo-icon-bg {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 32px;
-          height: 32px;
-          border-radius: 8px;
-          background: linear-gradient(135deg, #0066ff, #00e5ff);
-          color: white;
+        .footer-logo-img {
+          width: 36px;
+          height: 36px;
+          object-fit: contain;
+          display: block;
+          /* PNG has white bounding box — blend it away on dark bg */
+          mix-blend-mode: screen;
+          filter: brightness(1.05);
         }
 
         .footer-logo .logo-text {
@@ -512,8 +440,8 @@ export default function Footer() {
 
         .brand-tagline {
           color: #94a3b8;
-          font-size: 0.95rem;
-          line-height: 1.6;
+          font-size: 0.92rem;
+          line-height: 1.65;
           max-width: 300px;
         }
 
@@ -533,11 +461,12 @@ export default function Footer() {
         .footer-column a {
           color: #94a3b8;
           font-size: 0.9rem;
+          text-decoration: none;
           transition: color 0.2s ease;
         }
 
         .footer-column a:hover {
-          color: #00e5ff;
+          color: #a5b4fc;
         }
 
         .contact-item {
@@ -567,11 +496,12 @@ export default function Footer() {
 
         .social-links a {
           color: #64748b;
+          text-decoration: none;
           transition: color 0.2s ease;
         }
 
         .social-links a:hover {
-          color: #00e5ff;
+          color: #a5b4fc;
         }
 
         @media (max-width: 992px) {
@@ -581,17 +511,6 @@ export default function Footer() {
             align-items: stretch;
             transform: translateY(-30px);
             margin: 0 20px;
-            gap: 32px;
-          }
-
-          .cta-side {
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: center;
-          }
-
-          .stat-card {
-            width: 120px;
           }
 
           .footer-grid {
@@ -607,6 +526,12 @@ export default function Footer() {
           .footer-bottom {
             flex-direction: column;
             text-align: center;
+          }
+          .download-cta-banner {
+            padding: 32px 24px;
+          }
+          .cta-title {
+            font-size: 1.8rem;
           }
         }
       `}</style>
