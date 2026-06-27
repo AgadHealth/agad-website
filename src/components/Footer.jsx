@@ -100,7 +100,9 @@ export default function Footer() {
           {/* Brand Info */}
           <div className="footer-brand">
             <div className="footer-logo">
-              <img src="/logo.png" alt="Agad logo" className="footer-logo-img" />
+              <div className="footer-logo-clip">
+                <img src="/logo.png" alt="Agad logo" className="footer-logo-img" />
+              </div>
               <span className="logo-text">Agad</span>
             </div>
             <p className="brand-tagline">
@@ -422,14 +424,21 @@ export default function Footer() {
           gap: 10px;
         }
 
-        .footer-logo-img {
+        /* Circular clip — removes the white square corners of the PNG on the dark footer */
+        .footer-logo-clip {
           width: 36px;
           height: 36px;
-          object-fit: contain;
+          border-radius: 50%;
+          overflow: hidden;
+          flex-shrink: 0;
+        }
+
+        .footer-logo-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
           display: block;
-          /* PNG has white bounding box — blend it away on dark bg */
-          mix-blend-mode: screen;
-          filter: brightness(1.05);
+          transform: scale(1.06);
         }
 
         .footer-logo .logo-text {
