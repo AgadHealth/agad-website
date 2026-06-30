@@ -23,14 +23,14 @@ export default function HowItWorks() {
       num: "1",
       title: "Download Agad",
       desc: "Available on iOS and Android. Get the app from the App Store or Google Play, or scan the QR code to install instantly.",
-      pos: "above",
+      pos: "below",
     },
     {
       icon: <UserPlus size={19} strokeWidth={2} />,
       num: "2",
       title: "Set Up Your Profile",
       desc: "Enter your health baseline, connect wearable trackers, and let Agad build your personalized health dashboard.",
-      pos: "below",
+      pos: "above",
     },
     {
       icon: <Heart size={19} strokeWidth={2} />,
@@ -42,13 +42,13 @@ export default function HowItWorks() {
   ];
 
   // SVG coordinate space
-  const W = 900,
-    H = 220;
-  const WAVE = `M 70,65 C 210,65 295,155 450,155 C 605,155 690,65 830,65`;
+  const W = 1000,
+    H = 350;
+  const WAVE = `M 60,40 C 300,10 320,340 500,175 C 680,10 700,340 940,310`;
   const NODES = [
-    { cx: 70, cy: 65 },
-    { cx: 450, cy: 155 },
-    { cx: 830, cy: 65 },
+    { cx: 60, cy: 40 },
+    { cx: 500, cy: 175 },
+    { cx: 940, cy: 310 },
   ];
 
   useEffect(() => {
@@ -180,6 +180,46 @@ export default function HowItWorks() {
           [nodeRefs[0].current, nodeRefs[1].current, nodeRefs[2].current],
           { clearProps: "all" }
         );
+
+        // Mobile straight line and step nodes scroll trigger reveal
+        const mobRows = gsap.utils.toArray(".mob-row-step");
+        mobRows.forEach((row) => {
+          const node = row.querySelector(".mob-node");
+          const line = row.querySelector(".mob-line");
+          const body = row.querySelector(".mob-body");
+
+          gsap.fromTo(
+            [node, body],
+            { opacity: 0.25, y: 15, scale: 0.96 },
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              scrollTrigger: {
+                trigger: row,
+                start: "top 85%",
+                end: "top 65%",
+                scrub: true,
+              },
+            }
+          );
+
+          if (line) {
+            gsap.fromTo(
+              line,
+              { scaleY: 0, transformOrigin: "top center" },
+              {
+                scaleY: 1,
+                scrollTrigger: {
+                  trigger: row,
+                  start: "top 80%",
+                  end: "bottom 70%",
+                  scrub: true,
+                },
+              }
+            );
+          }
+        });
       }
     }, sectionRef);
 
@@ -222,7 +262,7 @@ export default function HowItWorks() {
             key={i}
             ref={ghostRefs[i]}
             className="ghost-num"
-            style={{ left: `calc(80px + (${n.cx} / 900) * (100% - 160px))` }}
+            style={{ left: `calc(80px + (${n.cx} / 1000) * (100% - 160px))` }}
           >
             {i + 1}
           </span>
@@ -237,13 +277,13 @@ export default function HowItWorks() {
         >
           <defs>
             <linearGradient id="wg" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#1e4d70" />
-              <stop offset="50%" stopColor="#4a7a9b" />
-              <stop offset="100%" stopColor="#6ba3c0" />
+              <stop offset="0%" stopColor="#0ea5e9" />
+              <stop offset="50%" stopColor="#0284c7" />
+              <stop offset="100%" stopColor="#38bdf8" />
             </linearGradient>
             <linearGradient id="nodeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#1e4d70" />
-              <stop offset="100%" stopColor="#6ba3c0" />
+              <stop offset="0%" stopColor="#0ea5e9" />
+              <stop offset="100%" stopColor="#0284c7" />
             </linearGradient>
             <filter id="glow" x="-30%" y="-150%" width="160%" height="400%">
               <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
@@ -330,10 +370,10 @@ export default function HowItWorks() {
               key={i}
               className={`step-label step-${step.pos}`}
               style={{
-                left: `calc(80px + (${n.cx} / 900) * (100% - 160px))`,
+                left: `calc(80px + (${n.cx} / 1000) * (100% - 160px))`,
                 ...(step.pos === "above"
-                  ? { bottom: `calc(100% - (var(--offset-y) + (${n.cy} / 220) * var(--h-svg)) + 20px)` }
-                  : { top: `calc(var(--offset-y) + (${n.cy} / 220) * var(--h-svg) + 20px)` }),
+                  ? { bottom: `calc(100% - (var(--offset-y) + (${n.cy} / 350) * var(--h-svg)) + 20px)` }
+                  : { top: `calc(var(--offset-y) + (${n.cy} / 350) * var(--h-svg) + 20px)` }),
               }}
             >
               <div ref={labelRefs[i]} className="sl-card">
@@ -350,12 +390,12 @@ export default function HowItWorks() {
       {/* ══ MOBILE vertical timeline ══ */}
       <div className="mob-timeline">
         {steps.map((step, i) => (
-          <div key={i} className="mob-row">
+          <div key={i} className="mob-row mob-row-step">
             <div className="mob-track">
-              <div className="mob-node mob-node-on">{step.icon}</div>
-              {i < steps.length - 1 && <div className="mob-line mob-line-on" />}
+              <div className="mob-node">{step.icon}</div>
+              {i < steps.length - 1 && <div className="mob-line" />}
             </div>
-            <div className="mob-body mob-body-on">
+            <div className="mob-body">
               <span className="mob-num">Step {step.num}</span>
               <h3 className="mob-title">{step.title}</h3>
               <p className="mob-desc">{step.desc}</p>
@@ -383,7 +423,7 @@ export default function HowItWorks() {
           left: 0;
           right: 0;
           height: 25vh;
-          background: linear-gradient(to bottom, var(--bg-main, #ffffff) 0%, transparent 100%);
+          background: linear-gradient(to bottom, #f0f9ff 0%, transparent 100%);
           pointer-events: none;
           z-index: 10;
         }
@@ -393,7 +433,7 @@ export default function HowItWorks() {
           left: 0;
           right: 0;
           height: 25vh;
-          background: linear-gradient(to top, var(--bg-main, #ffffff) 0%, transparent 100%);
+          background: linear-gradient(to top, #f0f9ff 0%, transparent 100%);
           pointer-events: none;
           z-index: 10;
         }
@@ -409,7 +449,7 @@ export default function HowItWorks() {
           height: 500px;
           top: -150px;
           left: -150px;
-          background: radial-gradient(circle, rgba(30, 77, 112, 0.07) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(14, 165, 233, 0.07) 0%, transparent 70%);
           filter: blur(60px);
         }
         .bg-orb-br {
@@ -417,14 +457,14 @@ export default function HowItWorks() {
           height: 420px;
           bottom: -100px;
           right: -100px;
-          background: radial-gradient(circle, rgba(107, 163, 192, 0.08) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(2, 132, 199, 0.08) 0%, transparent 70%);
           filter: blur(55px);
         }
 
         .bg-dot-grid {
           position: absolute;
           inset: 0;
-          background-image: radial-gradient(circle, rgba(30, 77, 112, 0.06) 1px, transparent 1px);
+          background-image: radial-gradient(circle, rgba(14, 165, 233, 0.06) 1px, transparent 1px);
           background-size: 32px 32px;
           pointer-events: none;
           z-index: 0;
@@ -449,7 +489,7 @@ export default function HowItWorks() {
         .eyebrow-dash {
           flex: 0 0 32px;
           height: 1px;
-          background: #1e4d70;
+          background: #0ea5e9;
           opacity: 0.35;
           border-radius: 2px;
         }
@@ -458,7 +498,7 @@ export default function HowItWorks() {
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 2.5px;
-          color: #1e4d70;
+          color: #0ea5e9;
           opacity: 0.8;
         }
 
@@ -471,7 +511,7 @@ export default function HowItWorks() {
           margin-bottom: 10px;
         }
         .hiw-accent {
-          background: linear-gradient(135deg, #1e4d70 0%, #6ba3c0 100%);
+          background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -487,14 +527,14 @@ export default function HowItWorks() {
           width: 100%;
           max-width: 1050px;
           padding: 0 80px;
-          height: 380px;
+          height: 480px;
           flex-shrink: 0;
           z-index: 2;
 
           /* Precise vertical aspect-ratio coordinate variables */
           --w-svg: calc(100% - 160px);
-          --h-svg: calc(var(--w-svg) / 4.09);
-          --offset-y: calc((380px - var(--h-svg)) / 2);
+          --h-svg: calc(var(--w-svg) / 2.857);
+          --offset-y: calc((480px - var(--h-svg)) / 2);
         }
 
         .wave-svg {
@@ -508,13 +548,13 @@ export default function HowItWorks() {
         }
 
         .ring-outer {
-          fill: rgba(30, 77, 112, 0.07);
-          stroke: rgba(30, 77, 112, 0.14);
+          fill: rgba(14, 165, 233, 0.07);
+          stroke: rgba(14, 165, 233, 0.14);
           stroke-width: 1;
         }
         .ring-mid {
-          fill: rgba(30, 77, 112, 0.06);
-          stroke: rgba(30, 77, 112, 0.2);
+          fill: rgba(14, 165, 233, 0.06);
+          stroke: rgba(14, 165, 233, 0.2);
           stroke-width: 1;
         }
         .node-bubble {
@@ -541,7 +581,7 @@ export default function HowItWorks() {
           line-height: 1;
           user-select: none;
           pointer-events: none;
-          color: rgba(30, 77, 112, 0.05);
+          color: rgba(14, 165, 233, 0.05);
           opacity: 0;
           z-index: 0;
         }
@@ -583,7 +623,7 @@ export default function HowItWorks() {
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 2px;
-          color: #1e4d70;
+          color: #0ea5e9;
           opacity: 0.65;
           margin: 0 0 5px;
         }
@@ -613,7 +653,7 @@ export default function HowItWorks() {
         }
         .conn-on {
           opacity: 1;
-          background: linear-gradient(to bottom, rgba(30, 77, 112, 0.5), rgba(107, 163, 192, 0.3));
+          background: linear-gradient(to bottom, rgba(14, 165, 233, 0.5), rgba(2, 132, 199, 0.3));
         }
 
         .mob-timeline {
@@ -649,9 +689,9 @@ export default function HowItWorks() {
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
-          background: linear-gradient(135deg, #1e4d70, #6ba3c0);
+          background: linear-gradient(135deg, #0ea5e9, #0284c7);
           color: white;
-          box-shadow: 0 6px 20px rgba(30, 77, 112, 0.28);
+          box-shadow: 0 6px 20px rgba(14, 165, 233, 0.28);
         }
 
         .mob-line {
@@ -660,7 +700,7 @@ export default function HowItWorks() {
           min-height: 28px;
           border-radius: 2px;
           margin: 6px 0;
-          background: linear-gradient(to bottom, #1e4d70, #6ba3c0);
+          background: linear-gradient(to bottom, #0ea5e9, #0284c7);
         }
 
         .mob-body {
@@ -674,7 +714,7 @@ export default function HowItWorks() {
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 2px;
-          color: #1e4d70;
+          color: #0ea5e9;
           margin-bottom: 4px;
           opacity: 0.65;
         }
