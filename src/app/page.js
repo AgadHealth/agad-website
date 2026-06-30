@@ -104,7 +104,7 @@ export default function Home() {
             <div className="phone-wrap">
               <div className="phone-fade-wrap">
                 <img
-                  src="/hand-mockup.png"
+                  src="/hero-mockup.png"
                   alt="Agad app on iPhone"
                   className="phone-img"
                 />
