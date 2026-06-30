@@ -623,15 +623,19 @@ export default function Home() {
            RESPONSIVE
         ══════════════════════════════════════════ */
         @media (max-width: 768px) {
+          .hero-section {
+            min-height: auto;
+            padding-bottom: 20px;
+          }
           .hero-copy {
-            padding: 120px 20px 0;
+            padding: 100px 20px 0;
             max-width: 100%;
           }
           .hero-headline { font-size: clamp(2.2rem, 8vw, 3.2rem); }
           .hero-visual {
             max-width: 100%;
-            padding: 0 80px 80px;
-            margin-top: 40px;
+            padding: 0 20px 20px;
+            margin-top: 30px;
           }
           .phone-wrap { width: 240px; max-width: 54vw; }
           .card-tl { left: -5px; }
