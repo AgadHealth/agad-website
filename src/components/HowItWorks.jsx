@@ -44,11 +44,11 @@ export default function HowItWorks() {
   // SVG coordinate space
   const W = 1000,
     H = 350;
-  const WAVE = `M 60,40 C 300,10 320,340 500,175 C 680,10 700,340 940,310`;
+  const WAVE = `M 45,40 C 260,10 280,340 500,175 C 720,10 740,340 955,310`;
   const NODES = [
-    { cx: 60, cy: 40 },
+    { cx: 45, cy: 40 },
     { cx: 500, cy: 175 },
-    { cx: 940, cy: 310 },
+    { cx: 955, cy: 310 },
   ];
 
   useEffect(() => {
@@ -111,7 +111,7 @@ export default function HowItWorks() {
         const activateNode = (i) => {
           masterTl.to(
             nodeRefs[i].current,
-            { scale: 1.18, transformOrigin: "center center", duration: 0.4, ease: "back.out(2)" },
+            { scale: 1.18, svgOrigin: `${NODES[i].cx} ${NODES[i].cy}`, duration: 0.4, ease: "back.out(2)" },
             "<"
           );
         };
@@ -121,7 +121,7 @@ export default function HowItWorks() {
           .call(() => setActiveStep(1))
           .to(nodeRefs[0].current, {
             scale: 1.15,
-            transformOrigin: "center center",
+            svgOrigin: `${NODES[0].cx} ${NODES[0].cy}`,
             duration: 0.6,
             ease: "back.out(2)",
           })
@@ -140,11 +140,11 @@ export default function HowItWorks() {
           })
 
           // node 1 settles back, node 2 pops with glow
-          .to(nodeRefs[0].current, { scale: 1, transformOrigin: "center center", duration: 0.4 }, "<+0.2")
+          .to(nodeRefs[0].current, { scale: 1, svgOrigin: `${NODES[0].cx} ${NODES[0].cy}`, duration: 0.4 }, "<+0.2")
           .call(() => setActiveStep(2))
           .to(
             nodeRefs[1].current,
-            { scale: 1.15, transformOrigin: "center center", duration: 0.6, ease: "back.out(2)" },
+            { scale: 1.15, svgOrigin: `${NODES[1].cx} ${NODES[1].cy}`, duration: 0.6, ease: "back.out(2)" },
             "-=0.3"
           )
           .to(ghostRefs[1].current, { opacity: 1, duration: 0.6 }, "<")
@@ -162,11 +162,11 @@ export default function HowItWorks() {
           })
 
           // node 2 settles back, node 3 pops with glow
-          .to(nodeRefs[1].current, { scale: 1, transformOrigin: "center center", duration: 0.4 }, "<+0.2")
+          .to(nodeRefs[1].current, { scale: 1, svgOrigin: `${NODES[1].cx} ${NODES[1].cy}`, duration: 0.4 }, "<+0.2")
           .call(() => setActiveStep(3))
           .to(
             nodeRefs[2].current,
-            { scale: 1.15, transformOrigin: "center center", duration: 0.6, ease: "back.out(2)" },
+            { scale: 1.15, svgOrigin: `${NODES[2].cx} ${NODES[2].cy}`, duration: 0.6, ease: "back.out(2)" },
             "-=0.3"
           )
           .to(ghostRefs[2].current, { opacity: 1, duration: 0.6 }, "<")
@@ -262,7 +262,7 @@ export default function HowItWorks() {
             key={i}
             ref={ghostRefs[i]}
             className="ghost-num"
-            style={{ left: `calc(80px + (${n.cx} / 1000) * (100% - 160px))` }}
+            style={{ left: `calc(15px + (${n.cx} / 1000) * (100% - 30px))` }}
           >
             {i + 1}
           </span>
@@ -370,7 +370,7 @@ export default function HowItWorks() {
               key={i}
               className={`step-label step-${step.pos}`}
               style={{
-                left: `calc(80px + (${n.cx} / 1000) * (100% - 160px))`,
+                left: `calc(15px + (${n.cx} / 1000) * (100% - 30px))`,
                 ...(step.pos === "above"
                   ? { bottom: `calc(100% - (var(--offset-y) + (${n.cy} / 350) * var(--h-svg)) + 20px)` }
                   : { top: `calc(var(--offset-y) + (${n.cy} / 350) * var(--h-svg) + 20px)` }),
@@ -525,25 +525,25 @@ export default function HowItWorks() {
         .wave-scene {
           position: relative;
           width: 100%;
-          max-width: 1050px;
-          padding: 0 80px;
+          max-width: 1250px;
+          padding: 0 15px;
           height: 480px;
           flex-shrink: 0;
           z-index: 2;
 
           /* Precise vertical aspect-ratio coordinate variables */
-          --w-svg: calc(100% - 160px);
+          --w-svg: calc(100% - 30px);
           --h-svg: calc(var(--w-svg) / 2.857);
           --offset-y: calc((480px - var(--h-svg)) / 2);
         }
 
         .wave-svg {
           position: absolute;
-          left: 80px;
-          right: 80px;
+          left: 15px;
+          right: 15px;
           top: 0;
           bottom: 0;
-          width: calc(100% - 160px);
+          width: calc(100% - 30px);
           height: 100%;
         }
 

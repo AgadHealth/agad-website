@@ -42,6 +42,12 @@ export default function Footer() {
 
   return (
     <footer id="download" className="footer">
+      {/* Background decoration matching hero section */}
+      <div className="footer-bg" aria-hidden="true">
+        <div className="footer-bg-glow" />
+        <div className="footer-bg-dots" />
+      </div>
+
       {/* Main Footer Links & Info */}
       <div className="footer-links-container">
         <div className="footer-grid">
@@ -96,17 +102,55 @@ export default function Footer() {
       <style jsx>{`
         .footer {
           width: 100%;
-          background: #071124;
-          color: white;
+          background: linear-gradient(
+            180deg,
+            #f8fafc 0%,
+            #cfdfef 15%,
+            #6b94c0 35%,
+            #204d7c 55%,
+            #0b132b 75%,
+            #071124 100%
+          );
+          color: #334155;
           position: relative;
           z-index: 1;
+          overflow: hidden;
+        }
+
+        .footer-bg {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .footer-bg-glow {
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(
+            ellipse 150% 120% at 50% 100%,
+            rgba(58, 134, 255, 0.65) 0%,
+            rgba(14, 165, 233, 0.35) 50%,
+            transparent 90%
+          );
+        }
+
+        .footer-bg-dots {
+          position: absolute;
+          inset: 0;
+          background-image: radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+          background-size: 38px 38px;
+          -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 80%);
+          mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 80%);
         }
 
         /* Footer Links */
         .footer-links-container {
           max-width: 1200px;
           margin: 0 auto;
-          padding: 80px 24px 60px;
+          padding: 240px 24px 50px;
+          position: relative;
+          z-index: 1;
         }
 
         .footer-grid {
@@ -114,7 +158,7 @@ export default function Footer() {
           grid-template-columns: 1.5fr 1fr 1fr 1fr;
           gap: 40px;
           padding-bottom: 60px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          border-bottom: 1px solid rgba(148, 163, 184, 0.25);
         }
 
         .footer-brand {
@@ -149,7 +193,7 @@ export default function Footer() {
         .footer-logo .logo-text {
           font-size: 1.4rem;
           font-weight: 800;
-          color: white;
+          color: #0b132b;
         }
 
         .brand-tagline {
@@ -166,7 +210,7 @@ export default function Footer() {
         }
 
         .footer-column h4 {
-          color: white;
+          color: #0b132b;
           font-size: 1rem;
           font-weight: 700;
           margin-bottom: 6px;
@@ -180,7 +224,7 @@ export default function Footer() {
         }
 
         .footer-column a:hover {
-          color: #a5b4fc;
+          color: #00f5d4;
         }
 
         .contact-item {
@@ -195,7 +239,7 @@ export default function Footer() {
         }
 
         .contact-item:hover {
-          color: #a5b4fc;
+          color: #00f5d4;
         }
 
         /* Bottom Row */
@@ -206,8 +250,13 @@ export default function Footer() {
           align-items: center;
           flex-wrap: wrap;
           gap: 20px;
-          color: #64748b;
           font-size: 0.85rem;
+          border-top: 1px solid rgba(148, 163, 184, 0.25);
+        }
+
+        .footer-bottom p {
+          color: #94a3b8;
+          margin: 0;
         }
 
         .social-links {
@@ -216,13 +265,13 @@ export default function Footer() {
         }
 
         .social-links a {
-          color: #64748b;
+          color: #94a3b8;
           text-decoration: none;
           transition: color 0.2s ease;
         }
 
         .social-links a:hover {
-          color: #a5b4fc;
+          color: #00f5d4;
         }
 
         @media (max-width: 992px) {
@@ -235,14 +284,43 @@ export default function Footer() {
           }
 
           .footer-grid {
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            grid-template-columns: 1.25fr 0.75fr;
+            gap: 35px;
+          }
+          .footer-brand {
+            grid-column: span 2;
+          }
+          .footer-column:last-child {
+            grid-column: span 2;
+            align-items: center;
+            text-align: center;
+            margin-top: 20px;
+            transform: translateX(-25px);
+          }
+          .footer-column:last-child .contact-item {
+            justify-content: center;
+            width: 100%;
           }
         }
 
         @media (max-width: 576px) {
           .footer-grid {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1.25fr 0.75fr;
+            gap: 30px 15px;
+          }
+          .footer-brand {
+            grid-column: span 2;
+          }
+          .footer-column:last-child {
+            grid-column: span 2;
+            margin-top: 25px;
+            align-items: center;
+            text-align: center;
+            transform: translateX(-25px);
+          }
+          .footer-column:last-child .contact-item {
+            justify-content: center;
+            width: 100%;
           }
           .footer-bottom {
             flex-direction: column;
