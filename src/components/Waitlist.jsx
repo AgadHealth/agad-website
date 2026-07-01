@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { supabase } from "@/lib/supabase";
 
 
 export default function Waitlist() {
@@ -34,10 +35,16 @@ export default function Waitlist() {
 
     setLoading(true);
 
-    // Simulate submission delay
-    await new Promise((resolve) => setTimeout(resolve, 800));
+    const { error } = await supabase
+      .from("waitlist")
+      .insert([{ name, email }]);
 
     setLoading(false);
+
+    if (error) {
+      alert("Something went wrong: " + error.message);
+      return;
+    }
 
     setSuccess(true);
 
