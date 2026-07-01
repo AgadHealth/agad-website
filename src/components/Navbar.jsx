@@ -229,19 +229,16 @@ export default function Navbar() {
           font-weight: 700;
           text-decoration: none;
           letter-spacing: -0.01em;
-          /* White outlined pill — same as Fintpay "Try For Free" */
-          background: rgba(255, 255, 255, 0.14);
-          border: 1.5px solid rgba(255, 255, 255, 0.65);
+          background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+          border: none;
           color: #ffffff;
-          backdrop-filter: blur(8px);
-          -webkit-backdrop-filter: blur(8px);
           transition:
             background 0.22s ease,
-            border-color 0.22s ease,
             transform 0.22s ease,
             box-shadow 0.22s ease;
           position: relative;
           overflow: hidden;
+          box-shadow: 0 4px 18px rgba(14,165,233,0.35);
         }
 
         .nav-cta::after {
@@ -254,10 +251,8 @@ export default function Navbar() {
         }
 
         .nav-cta:hover {
-          background: rgba(255, 255, 255, 0.24);
-          border-color: rgba(255, 255, 255, 0.9);
           transform: translateY(-2px);
-          box-shadow: 0 6px 22px rgba(0, 0, 0, 0.18);
+          box-shadow: 0 8px 24px rgba(14,165,233,0.48);
         }
 
         .nav-cta:hover::after { opacity: 1; }
@@ -273,15 +268,15 @@ export default function Navbar() {
           gap: 5px;
           width: 36px;
           height: 36px;
-          background: rgba(255,255,255,0.10);
-          border: 1px solid rgba(255,255,255,0.22);
+          background: transparent;
+          border: none;
           border-radius: 10px;
           cursor: pointer;
           padding: 0;
           transition: background 0.2s ease;
         }
 
-        .hamburger:hover { background: rgba(255,255,255,0.18); }
+        .hamburger:hover { background: rgba(255,255,255,0.10); }
 
         .ham-line {
           display: block;
@@ -301,7 +296,11 @@ export default function Navbar() {
            MOBILE DROPDOWN
         ══════════════════════════════════════════ */
         .mobile-menu {
-          background: rgba(16, 40, 62, 0.96);
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: rgba(20, 48, 74, 0.96);
           backdrop-filter: blur(24px);
           -webkit-backdrop-filter: blur(24px);
           border-top: 1px solid rgba(255,255,255,0.10);
@@ -342,16 +341,20 @@ export default function Navbar() {
           margin-top: 8px;
           padding: 12px 24px;
           border-radius: 999px;
-          background: rgba(255,255,255,0.12);
-          border: 1.5px solid rgba(255,255,255,0.55);
+          background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+          border: none;
           color: #fff;
           font-size: 0.92rem;
           font-weight: 700;
           text-decoration: none;
-          transition: background 0.2s ease;
+          box-shadow: 0 4px 18px rgba(14,165,233,0.35);
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .mobile-cta:hover { background: rgba(255,255,255,0.22); }
+        .mobile-cta:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 24px rgba(14,165,233,0.48);
+        }
 
         /* ══════════════════════════════════════════
            RESPONSIVE
