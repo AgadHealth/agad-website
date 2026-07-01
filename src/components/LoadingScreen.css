@@ -1,0 +1,148 @@
+.loader{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:linear-gradient(
+        180deg,
+        #486684 0%,
+        #5d82a9 45%,
+        #87aed2 100%
+    );
+
+    animation:loaderFade 3.5s forwards;
+}
+
+.loaderContent{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    animation:zoomOut 3.5s forwards;
+}
+
+.logoCircle{
+
+    width:120px;
+    height:120px;
+
+    border-radius:50%;
+
+    background:#0E2442;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    box-shadow:
+    0 0 0 rgba(255,255,255,.15),
+    0 20px 60px rgba(0,0,0,.25);
+
+    animation:pulse 2s ease-in-out infinite;
+}
+
+.loaderContent h1{
+
+    margin-top:26px;
+
+    color:white;
+
+    font-size:44px;
+
+    font-weight:800;
+
+    letter-spacing:10px;
+}
+
+.loaderContent p{
+
+    margin-top:8px;
+
+    color:rgba(255,255,255,.8);
+
+    font-size:18px;
+
+    letter-spacing:1px;
+}
+
+.heartbeat {
+  stroke-dasharray: 225;
+  stroke-dashoffset: 225;
+  animation: pulse-draw 4s linear infinite;
+}
+
+@keyframes pulse-draw {
+  0% {
+    stroke-dashoffset: 225;
+  }
+  100% {
+    stroke-dashoffset: -225;
+  }
+}
+
+@keyframes drawLine{
+
+    to{
+        stroke-dashoffset:0;
+    }
+
+}
+
+@keyframes pulse{
+
+    0%,100%{
+        transform:scale(1);
+        box-shadow:
+        0 0 0 rgba(255,255,255,.1),
+        0 20px 60px rgba(0,0,0,.25);
+    }
+
+    50%{
+        transform:scale(1.06);
+        box-shadow:
+        0 0 40px rgba(255,255,255,.18),
+        0 20px 80px rgba(0,0,0,.28);
+    }
+
+}
+
+@keyframes zoomOut{
+
+    0%{
+        opacity:0;
+        transform:scale(.8);
+    }
+
+    15%{
+        opacity:1;
+        transform:scale(1);
+    }
+
+    70%{
+        opacity:1;
+        transform:scale(1);
+    }
+
+    100%{
+        opacity:0;
+        transform:scale(2.4);
+    }
+
+}
+
+@keyframes loaderFade{
+
+    0%,85%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0;
+        visibility:hidden;
+    }
+
+}
