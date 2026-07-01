@@ -65,8 +65,6 @@ export default function Waitlist() {
     <>
       <section id="waitlist" className="waitlist">
 
-        <div className="glow"></div>
-
         <div className="content">
 
           <h2>Get Early Access</h2>
@@ -172,11 +170,7 @@ export default function Waitlist() {
   padding:60px 20px 100px;
   position:relative;
   overflow:hidden;
-  background:linear-gradient(
-    180deg,
-    #f6fbff,
-    #ffffff
-  );
+  background:#f0f9ff;
 }
 
 .glow{

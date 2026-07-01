@@ -36,13 +36,13 @@ export default function Navbar() {
         {/* Desktop nav links */}
         <nav className="navbar-links" aria-label="Main navigation">
           <a href="#features"    className="nav-link">Features</a>
-          <a href="#showcase"    className="nav-link">Showcase</a>
           <a href="#how-it-works" className="nav-link">How It Works</a>
+          <a href="#download"    className="nav-link">Contact Us</a>
         </nav>
 
         {/* CTA */}
         <div className="navbar-actions">
-          <a href="#download" className="nav-cta">
+          <a href="#waitlist" className="nav-cta">
             Get Agad
           </a>
 
@@ -63,9 +63,9 @@ export default function Navbar() {
       {mobileOpen && (
         <div className="mobile-menu" onClick={e => e.stopPropagation()}>
           <a href="#features"     className="mobile-link" onClick={() => setMobileOpen(false)}>Features</a>
-          <a href="#showcase"     className="mobile-link" onClick={() => setMobileOpen(false)}>Showcase</a>
           <a href="#how-it-works" className="mobile-link" onClick={() => setMobileOpen(false)}>How It Works</a>
-          <a href="#download"     className="mobile-cta"  onClick={() => setMobileOpen(false)}>Get Agad</a>
+          <a href="#download"     className="mobile-link" onClick={() => setMobileOpen(false)}>Contact Us</a>
+          <a href="#waitlist"     className="mobile-cta"  onClick={() => setMobileOpen(false)}>Get Agad</a>
         </div>
       )}
 

@@ -10,153 +10,191 @@ import { ArrowRight, Heart, Shield, Activity, Users } from "lucide-react";
 
 export default function Home() {
   const [visible, setVisible] = useState(false);
-const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
-useEffect(() => {
-  const show = setTimeout(() => {
-    setVisible(true);
-  }, 80);
+  useEffect(() => {
+    const show = setTimeout(() => {
+      setVisible(true);
+    }, 80);
 
-  const loader = setTimeout(() => {
-    setLoading(false);
-  }, 2400);
+    const loader = setTimeout(() => {
+      setLoading(false);
+    }, 2400);
 
-  return () => {
-    clearTimeout(show);
-    clearTimeout(loader);
-  };
-}, []);
+    return () => {
+      clearTimeout(show);
+      clearTimeout(loader);
+    };
+  }, []);
 
   return (
-  <>
-    {loading && <LoadingScreen />}
+    <>
+      {loading && <LoadingScreen />}
 
-    <div className="home-wrapper">
-      <Navbar />
+      <div className="home-wrapper">
+        <Navbar />
 
-      <main className="main-content">
+        <main className="main-content">
 
-        {/* ═══════════════════════════════════════════════════
+          {/* ═══════════════════════════════════════════════════
             HERO — Fintpay-inspired centered layout
             Dark blue/teal top → light/white bottom
         ═══════════════════════════════════════════════════ */}
-        <section id="hero" className="hero-section">
+          <section id="hero" className="hero-section">
 
-          {/* ── Background layers ── */}
-          <div className="hero-bg" aria-hidden="true">
-            {/* Base gradient: dark teal top → light bottom */}
-            <div className="bg-gradient-base" />
-            {/* Subtle radial glow near top-center */}
-            <div className="bg-radial-glow" />
-            {/* Dot grid, fades away towards bottom */}
-            <div className="bg-dot-grid" />
-          </div>
-
-          {/* ── CENTERED COPY ── */}
-          <div className={`hero-copy ${visible ? "anim-in" : ""}`}>
-
-            {/* Pill badge — matches Fintpay "New | Your Smart Finance Companion" */}
-            <div className="hero-badge">
-              <span className="badge-tag">New</span>
-              <span className="badge-text">Your Smart Health Companion</span>
-              <ArrowRight size={11} strokeWidth={2.5} />
+            {/* ── Background layers ── */}
+            <div className="hero-bg" aria-hidden="true">
+              {/* Base gradient: dark teal top → light bottom */}
+              <div className="bg-gradient-base" />
+              {/* Subtle radial glow near top-center */}
+              <div className="bg-radial-glow" />
+              {/* Dot grid, fades away towards bottom */}
+              <div className="bg-dot-grid" />
             </div>
 
-            <h1 className="hero-headline">
-              Your Doctor,<br />On Demand.
-            </h1>
+            {/* ── CENTERED COPY ── */}
+            <div className={`hero-copy ${visible ? "anim-in" : ""}`}>
 
-            {/* CTAs — outline ghost + solid filled (like Fintpay "Explore APIs" + "Get in Touch") */}
-            <div className="hero-actions">
-              <a href="#features" className="cta-outline">
-                Explore Features
-              </a>
-              <a href="#waitlist" className="cta-filled">
-  Join Waitlist
-</a>
-            </div>
-          </div>
-
-          {/* ── VISUAL: phone + orbit + 3 floating cards ── */}
-          <div className={`hero-visual ${visible ? "anim-in" : ""}`}>
-
-            {/* Orbit circle — SVG ring around phone area */}
-            <div className="orbit-ring" aria-hidden="true">
-              <svg viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle
-                  cx="250" cy="250" r="220"
-                  stroke="rgba(56,189,248,0.18)"
-                  strokeWidth="1"
-                  strokeDasharray="6 8"
-                />
-                {/* Glowing dot on orbit */}
-                <circle cx="470" cy="250" r="4" fill="#38bdf8" opacity="0.9" />
-                <circle cx="470" cy="250" r="8" fill="rgba(56,189,248,0.25)" />
-              </svg>
-            </div>
-
-            {/* Floating card — "The Future of Healthcare, Today" (top-left, like Fintpay) */}
-            <div className={`float-card card-tl ${visible ? "card-in" : ""}`}>
-              <div className="fc-icon-row">
-                <div className="fc-dot fc-dot-blue" />
-                <span className="fc-label">The Future of</span>
+              {/* Pill badge — matches Fintpay "New | Your Smart Finance Companion" */}
+              <div className="hero-badge">
+                <span className="badge-tag">New</span>
+                <span className="badge-text">Your Smart Health Companion</span>
+                <ArrowRight size={11} strokeWidth={2.5} />
               </div>
-              <p className="fc-title">Healthcare, Today.</p>
-            </div>
 
-            {/* Floating card — Health Score 98% (right, like Fintpay "Phone Bill Payment 80%") */}
-            <div className={`float-card card-tr ${visible ? "card-in" : ""}`}>
-              <div className="fc-header">
-                <div className="fc-icon-wrap"><Shield size={12} /></div>
-                <span className="fc-label">Health Score</span>
-                <div className="fc-badge-blue">Optimal</div>
-              </div>
-              <p className="fc-big-num">98<span className="fc-big-pct">%</span></p>
-            </div>
+              <h1 className="hero-headline">
+                Your Doctor,<br />On Demand.
+              </h1>
 
-            {/* Phone centered */}
-            <div className="phone-wrap">
-              <div className="phone-fade-wrap">
-                <img
-                  src="/hero-mockup.png"
-                  alt="Agad app on iPhone"
-                  className="phone-img"
-                />
+              {/* CTAs — outline ghost + solid filled (like Fintpay "Explore APIs" + "Get in Touch") */}
+              <div className="hero-actions">
+                <a href="#features" className="cta-outline">
+                  Explore Features
+                </a>
+                <a href="#waitlist" className="cta-filled">
+                  Join Waitlist
+                </a>
               </div>
             </div>
 
-            {/* Floating card — bottom left, like Fintpay "Secure Digital payments / 2.5M" */}
-            <div className={`float-card card-bl ${visible ? "card-in" : ""}`}>
-              <div className="fc-avatars">
-                <div className="fca fca-1" />
-                <div className="fca fca-2" />
-                <div className="fca fca-3" />
+            {/* ── VISUAL: phone + orbit + 3 floating cards ── */}
+            <div className={`hero-visual ${visible ? "anim-in" : ""}`}>
+
+              {/* Orbit circles — SVG rings around phone area */}
+              <div className="orbit-ring orbit-ring-1" aria-hidden="true">
+                <svg viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle
+                    cx="250" cy="250" r="240"
+                    stroke="rgba(255, 255, 255, 0.35)"
+                    strokeWidth="1.2"
+                  />
+                  {/* Glowing dot on inner orbit */}
+                  <circle cx="250" cy="10" r="3.5" fill="#38bdf8" opacity="0.9" />
+                  <circle cx="250" cy="10" r="7" fill="rgba(56, 189, 248, 0.35)" />
+                </svg>
               </div>
-              <div className="fc-count-block">
-                <p className="fc-count">1,200+</p>
-                <p className="fc-count-sub">On Waitlist</p>
+
+              <div className="orbit-ring orbit-ring-2" aria-hidden="true">
+                <svg viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle
+                    cx="250" cy="250" r="240"
+                    stroke="rgba(255, 255, 255, 0.4)"
+                    strokeWidth="1.2"
+                  />
+                  {/* Glowing dot on middle orbit */}
+                  <circle cx="490" cy="250" r="4" fill="#38bdf8" opacity="0.95" />
+                  <circle cx="490" cy="250" r="8" fill="rgba(56, 189, 248, 0.4)" />
+                </svg>
               </div>
+
+              <div className="orbit-ring orbit-ring-3" aria-hidden="true">
+                <svg viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle
+                    cx="250" cy="250" r="240"
+                    stroke="rgba(255, 255, 255, 0.3)"
+                    strokeWidth="1.2"
+                  />
+                  {/* Glowing dot on outer orbit */}
+                  <circle cx="80" cy="80" r="4.5" fill="#38bdf8" opacity="0.9" />
+                  <circle cx="80" cy="80" r="9" fill="rgba(56, 189, 248, 0.3)" />
+                </svg>
+              </div>
+
+              <div className="orbit-ring orbit-ring-4" aria-hidden="true">
+                <svg viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle
+                    cx="250" cy="250" r="240"
+                    stroke="rgba(255, 255, 255, 0.25)"
+                    strokeWidth="1.2"
+                  />
+                  {/* Glowing dot on fourth orbit */}
+                  <circle cx="250" cy="490" r="4" fill="#38bdf8" opacity="0.85" />
+                  <circle cx="250" cy="490" r="8" fill="rgba(56, 189, 248, 0.25)" />
+                </svg>
+              </div>
+
+              {/* Floating card — "The Future of Healthcare, Today" (top-left, like Fintpay) */}
+              <div className={`float-card card-tl ${visible ? "card-in" : ""}`}>
+                <div className="fc-icon-row">
+                  <div className="fc-dot fc-dot-blue" />
+                  <span className="fc-label">The Future of</span>
+                </div>
+                <p className="fc-title">Healthcare, Today.</p>
+              </div>
+
+              {/* Floating card — Health Score 98% (right, like Fintpay "Phone Bill Payment 80%") */}
+              <div className={`float-card card-tr ${visible ? "card-in" : ""}`}>
+                <div className="fc-header">
+                  <div className="fc-icon-wrap"><Shield size={12} /></div>
+                  <span className="fc-label">Health Score</span>
+                  <div className="fc-badge-blue">Optimal</div>
+                </div>
+                <p className="fc-big-num">98<span className="fc-big-pct">%</span></p>
+              </div>
+
+              {/* Phone centered */}
+              <div className="phone-wrap">
+                <div className="phone-fade-wrap">
+                  <img
+                    src="/hero-mockup.png"
+                    alt="Agad app on iPhone"
+                    className="phone-img"
+                  />
+                </div>
+              </div>
+
+              {/* Floating card — bottom left, like Fintpay "Secure Digital payments / 2.5M" */}
+              <div className={`float-card card-bl ${visible ? "card-in" : ""}`}>
+                <div className="fc-avatars">
+                  <div className="fca fca-1" />
+                  <div className="fca fca-2" />
+                  <div className="fca fca-3" />
+                </div>
+                <div className="fc-count-block">
+                  <p className="fc-count">1,200+</p>
+                  <p className="fc-count-sub">On Waitlist</p>
+                </div>
+              </div>
+
             </div>
 
-          </div>
-        
 
-        </section>
+          </section>
 
-        {/* FEATURES GRID */}
-        <Features />
+          {/* FEATURES GRID */}
+          <Features />
 
-        {/* WAITLIST + SOCIALS */}
-        <Waitlist />
+          {/* WAITLIST + SOCIALS */}
+          <Waitlist />
 
-        {/* HOW IT WORKS */}
-        <HowItWorks />
+          {/* HOW IT WORKS */}
+          <HowItWorks />
 
-      </main>
+        </main>
 
-      <Footer />
+        <Footer />
 
-      <style jsx>{`
+        <style jsx>{`
         /* ══════════════════════════════════════════
            ROOT
         ══════════════════════════════════════════ */
@@ -181,7 +219,7 @@ useEffect(() => {
           align-items: center;
           justify-content: flex-start;
           padding: 0;
-          overflow: hidden;
+          overflow: visible;
           max-width: 100% !important;
           margin: 0 !important;
         }
@@ -400,19 +438,57 @@ useEffect(() => {
           transform: none;
         }
 
-        /* Orbit SVG ring */
+        /* Orbit SVG rings */
         .orbit-ring {
           position: absolute;
-          inset: -40px;
           pointer-events: none;
           z-index: 1;
-          opacity: 0.7;
-          animation: orbitSpin 28s linear infinite;
+          opacity: 1.0;
+          top: 50%;
+          left: 50%;
+          transform-origin: center center;
+        }
+
+        .orbit-ring-1 {
+          width: 380px;
+          height: 380px;
+          margin-top: -190px;
+          margin-left: -190px;
+          animation: orbitSpin 36s linear infinite;
+        }
+
+        .orbit-ring-2 {
+          width: 480px;
+          height: 480px;
+          margin-top: -240px;
+          margin-left: -240px;
+          animation: orbitSpinRev 28s linear infinite;
+        }
+
+        .orbit-ring-3 {
+          width: 580px;
+          height: 580px;
+          margin-top: -290px;
+          margin-left: -290px;
+          animation: orbitSpin 44s linear infinite;
+        }
+
+        .orbit-ring-4 {
+          width: 680px;
+          height: 680px;
+          margin-top: -340px;
+          margin-left: -340px;
+          animation: orbitSpinRev 52s linear infinite;
         }
 
         @keyframes orbitSpin {
           from { transform: rotate(0deg); }
           to   { transform: rotate(360deg); }
+        }
+
+        @keyframes orbitSpinRev {
+          from { transform: rotate(360deg); }
+          to   { transform: rotate(0deg); }
         }
 
         /* Phone image — hand-mockup */
@@ -497,7 +573,7 @@ useEffect(() => {
         /* Waitlist count — bottom left */
         .card-bl {
           left: -10px;
-          bottom: 16%;
+          bottom: 45%;
           padding: 10px 14px;
           display: flex;
           align-items: center;
@@ -653,6 +729,30 @@ useEffect(() => {
             margin-top: 30px;
           }
           .phone-wrap { width: 240px; max-width: 54vw; }
+          .orbit-ring-1 {
+            width: 280px;
+            height: 280px;
+            margin-top: -140px;
+            margin-left: -140px;
+          }
+          .orbit-ring-2 {
+            width: 365px;
+            height: 365px;
+            margin-top: -182.5px;
+            margin-left: -182.5px;
+          }
+          .orbit-ring-3 {
+            width: 450px;
+            height: 450px;
+            margin-top: -225px;
+            margin-left: -225px;
+          }
+          .orbit-ring-4 {
+            width: 535px;
+            height: 535px;
+            margin-top: -267.5px;
+            margin-left: -267.5px;
+          }
           .card-tl { left: -5px; }
           .card-tr { right: -5px; }
           .card-bl { left: -5px; }
@@ -666,8 +766,8 @@ useEffect(() => {
           .hero-badge { font-size: 0.7rem; }
         }
       `}</style>
-    </div>
-  );
-  </>
+      </div>
+
+    </>
   )
 }
