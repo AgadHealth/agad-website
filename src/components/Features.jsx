@@ -18,6 +18,30 @@ export default function Features() {
       {/* Grid of the three cards */}
       <div className="features-grid-custom">
         
+        {/* Card 2: AI Coach */}
+        <div className="feature-card-new">
+          <div className="card-text-content">
+            <h3 className="card-title-new">PERSONALIZED AI<br />HEALTH COACH.</h3>
+            <p className="card-desc-new">
+              Receive smart insights and actionable advice tailored to your biometrics.
+            </p>
+          </div>
+          
+          <div className="phone-wrapper phone-coach">
+            <div className="phone-container">
+              <div className="iphone-dynamic-island" />
+              
+              <div className="phone-screen-content-image" style={{ paddingTop: '24px', background: '#f8fafc' }}>
+                <img 
+                  src="/feature-home.png" 
+                  alt="Agad Home Screen" 
+                  className="phone-image-fill" 
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Card 1: Track Vitals */}
         <div className="feature-card-new">
           <div className="card-text-content">
@@ -37,30 +61,6 @@ export default function Features() {
                 <img 
                   src="/feature-vitals.png" 
                   alt="Vitals History Screen" 
-                  className="phone-image-fill" 
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Card 2: AI Coach */}
-        <div className="feature-card-new">
-          <div className="card-text-content">
-            <h3 className="card-title-new">PERSONALIZED AI<br />HEALTH COACH.</h3>
-            <p className="card-desc-new">
-              Receive smart insights and actionable advice tailored to your biometrics.
-            </p>
-          </div>
-          
-          <div className="phone-wrapper phone-coach">
-            <div className="phone-container">
-              <div className="iphone-dynamic-island" />
-              
-              <div className="phone-screen-content-image" style={{ paddingTop: '24px', background: '#f8fafc' }}>
-                <img 
-                  src="/feature-home.png" 
-                  alt="Agad Home Screen" 
                   className="phone-image-fill" 
                 />
               </div>
@@ -115,12 +115,15 @@ export default function Features() {
         }
 
         .section-subtitle {
-          color: #4f46e5;
+          background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
           font-weight: 700;
           font-size: 0.95rem;
           text-transform: uppercase;
           letter-spacing: 2px;
-          display: block;
+          display: inline-block;
           margin-bottom: 14px;
         }
 

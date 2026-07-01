@@ -197,7 +197,7 @@ export default function Footer() {
         }
 
         .brand-tagline {
-          color: #94a3b8;
+          color: #ffffff;
           font-size: 0.92rem;
           line-height: 1.65;
           max-width: 300px;
@@ -217,7 +217,7 @@ export default function Footer() {
         }
 
         .footer-column a {
-          color: #94a3b8;
+          color: #ffffff;
           font-size: 0.9rem;
           text-decoration: none;
           transition: color 0.2s ease;
@@ -231,7 +231,7 @@ export default function Footer() {
           display: flex;
           align-items: center;
           gap: 8px;
-          color: #94a3b8;
+          color: #ffffff;
           font-size: 0.9rem;
           text-decoration: none;
           transition: color 0.2s ease;
@@ -242,7 +242,6 @@ export default function Footer() {
           color: #00f5d4;
         }
 
-        /* Bottom Row */
         .footer-bottom {
           padding-top: 40px;
           display: flex;
@@ -251,11 +250,10 @@ export default function Footer() {
           flex-wrap: wrap;
           gap: 20px;
           font-size: 0.85rem;
-          border-top: 1px solid rgba(148, 163, 184, 0.25);
         }
 
         .footer-bottom p {
-          color: #94a3b8;
+          color: #ffffff;
           margin: 0;
         }
 
@@ -265,7 +263,7 @@ export default function Footer() {
         }
 
         .social-links a {
-          color: #94a3b8;
+          color: #ffffff;
           text-decoration: none;
           transition: color 0.2s ease;
         }

@@ -372,8 +372,8 @@ export default function HowItWorks() {
               style={{
                 left: `calc(15px + (${n.cx} / 1000) * (100% - 30px))`,
                 ...(step.pos === "above"
-                  ? { bottom: `calc(100% - (var(--offset-y) + (${n.cy} / 350) * var(--h-svg)) + 20px)` }
-                  : { top: `calc(var(--offset-y) + (${n.cy} / 350) * var(--h-svg) + 20px)` }),
+                  ? { bottom: `calc(100% - (var(--offset-y) + (${n.cy} / 350) * var(--h-svg)) + ${i === 2 ? -75 : 20}px)` }
+                  : { top: `calc(var(--offset-y) + (${n.cy} / 350) * var(--h-svg) + ${i === 0 ? -80 : 20}px)` }),
               }}
             >
               <div ref={labelRefs[i]} className="sl-card">
