@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+
 export default function Waitlist() {
 
   const [email, setEmail] = useState("");
@@ -33,10 +34,11 @@ export default function Waitlist() {
 
     setLoading(true);
 
-    // Simulate API delay
+    // Simulate submission delay
     await new Promise((resolve) => setTimeout(resolve, 800));
 
     setLoading(false);
+
     setSuccess(true);
 
     setTimeout(() => {
@@ -52,113 +54,113 @@ export default function Waitlist() {
     }, 1800);
 
   };
- return (
-  <>
-    <section id="waitlist" className="waitlist">
+  return (
+    <>
+      <section id="waitlist" className="waitlist">
 
-      <div className="glow"></div>
+        <div className="glow"></div>
 
-      <div className="content">
+        <div className="content">
 
-        <h2>Get Early Access</h2>
+          <h2>Get Early Access</h2>
 
-        <p>
-          Be among the first to experience Agad.
-          Join our waitlist and get notified on launch.
-        </p>
+          <p>
+            Be among the first to experience Agad.
+            Join our waitlist and get notified on launch.
+          </p>
 
-        <div className="inputBox">
+          <div className="inputBox">
 
-          <input
-            type="email"
-            placeholder="Enter your email address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+            <input
+              type="email"
+              placeholder="Enter your email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
 
-          <button onClick={openModal}>
-            Join Waitlist
-          </button>
-
-        </div>
-
-        <div className="joined">
-
-          <div className="avatars">
-
-            <img src="https://i.pravatar.cc/100?img=12" alt="" />
-            <img src="https://i.pravatar.cc/100?img=14" alt="" />
-            <img src="https://i.pravatar.cc/100?img=16" alt="" />
+            <button onClick={openModal}>
+              Join Waitlist
+            </button>
 
           </div>
 
-          <span>
-            Join <strong>1,000+</strong> others on the waitlist
-          </span>
+          <div className="joined">
+
+            <div className="avatars">
+
+              <img src="https://i.pravatar.cc/100?img=12" alt="" />
+              <img src="https://i.pravatar.cc/100?img=14" alt="" />
+              <img src="https://i.pravatar.cc/100?img=16" alt="" />
+
+            </div>
+
+            <span>
+              Join <strong>1,000+</strong> others on the waitlist
+            </span>
+
+          </div>
 
         </div>
 
-      </div>
+        {showModal && (
 
-      {showModal && (
+          <div className="modalOverlay">
 
-        <div className="modalOverlay">
+            <div className="modal">
 
-          <div className="modal">
+              {!success ? (
 
-            {!success ? (
+                <>
 
-              <>
+                  <h3>Almost there 👋</h3>
 
-                <h3>Almost there 👋</h3>
+                  <p>
+                    Tell us your name to reserve your spot.
+                  </p>
 
-                <p>
-                  Tell us your name to reserve your spot.
-                </p>
+                  <input
+                    type="text"
+                    placeholder="Your Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
 
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  value={name}
-                  onChange={(e)=>setName(e.target.value)}
-                />
+                  <button
+                    onClick={handleSubmit}
+                    disabled={loading}
+                  >
+                    {loading ? "Joining..." : "Continue"}
+                  </button>
 
-                <button
-                  onClick={handleSubmit}
-                  disabled={loading}
-                >
-                  {loading ? "Joining..." : "Continue"}
-                </button>
+                </>
 
-              </>
+              ) : (
 
-            ) : (
+                <div className="success">
 
-              <div className="success">
+                  <div className="tick">
+                    ✓
+                  </div>
 
-                <div className="tick">
-                  ✓
+                  <h3>You're on the list!</h3>
+
+                  <p>
+                    We'll notify you as soon as AGAD launches.
+                  </p>
+
                 </div>
 
-                <h3>You're on the list!</h3>
+              )}
 
-                <p>
-                  We'll notify you as soon as AGAD launches.
-                </p>
-
-              </div>
-
-            )}
+            </div>
 
           </div>
 
-        </div>
+        )}
 
-      )}
+      </section>
 
-    </section>
-
-    <style jsx>{`
+      <style jsx>{`
     .waitlist{
   padding:60px 20px 100px;
   position:relative;

@@ -1,22 +1,36 @@
 "use client";
-
+import LoadingScreen from "@/components/LoadingScreen";
 import { useEffect, useRef, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Features from "@/components/Features";
-import InteractiveShowcase from "@/components/InteractiveShowcase";
+import Waitlist from "@/components/Waitlist";
 import HowItWorks from "@/components/HowItWorks";
 import Footer from "@/components/Footer";
 import { ArrowRight, Heart, Shield, Activity, Users } from "lucide-react";
 
 export default function Home() {
   const [visible, setVisible] = useState(false);
+const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const t = setTimeout(() => setVisible(true), 80);
-    return () => clearTimeout(t);
-  }, []);
+useEffect(() => {
+  const show = setTimeout(() => {
+    setVisible(true);
+  }, 80);
+
+  const loader = setTimeout(() => {
+    setLoading(false);
+  }, 2400);
+
+  return () => {
+    clearTimeout(show);
+    clearTimeout(loader);
+  };
+}, []);
 
   return (
+  <>
+    {loading && <LoadingScreen />}
+
     <div className="home-wrapper">
       <Navbar />
 
@@ -57,9 +71,9 @@ export default function Home() {
               <a href="#features" className="cta-outline">
                 Explore Features
               </a>
-              <a href="#showcase" className="cta-filled">
-                Join Waitlist
-              </a>
+              <a href="#waitlist" className="cta-filled">
+  Join Waitlist
+</a>
             </div>
           </div>
 
@@ -125,6 +139,7 @@ export default function Home() {
             </div>
 
           </div>
+        
 
         </section>
 
@@ -132,7 +147,7 @@ export default function Home() {
         <Features />
 
         {/* WAITLIST + SOCIALS */}
-        <InteractiveShowcase />
+        <Waitlist />
 
         {/* HOW IT WORKS */}
         <HowItWorks />
@@ -653,4 +668,6 @@ export default function Home() {
       `}</style>
     </div>
   );
+  </>
+  )
 }
