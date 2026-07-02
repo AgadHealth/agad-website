@@ -262,7 +262,7 @@ export default function HowItWorks() {
             key={i}
             ref={ghostRefs[i]}
             className="ghost-num"
-            style={{ left: `calc(15px + (${n.cx} / 1000) * (100% - 30px))` }}
+            style={{ left: `calc(40px + ((${n.cx} + 60) / 1120) * (100% - 80px))` }}
           >
             {i + 1}
           </span>
@@ -271,7 +271,7 @@ export default function HowItWorks() {
         {/* SVG wave */}
         <svg
           className="wave-svg"
-          viewBox={`0 0 ${W} ${H}`}
+          viewBox={`-60 -15 1120 380`}
           preserveAspectRatio="xMidYMid meet"
           aria-hidden="true"
         >
@@ -370,7 +370,7 @@ export default function HowItWorks() {
               key={i}
               className={`step-label step-${step.pos}`}
               style={{
-                left: `calc(15px + (${n.cx} / 1000) * (100% - 30px))`,
+                left: `calc(40px + ((${n.cx} + 60) / 1120) * (100% - 80px))`,
                 ...(step.pos === "above"
                   ? { bottom: `calc(100% - (var(--offset-y) + (${n.cy} / 350) * var(--h-svg)) + ${i === 2 ? -75 : 20}px)` }
                   : { top: `calc(var(--offset-y) + (${n.cy} / 350) * var(--h-svg) + ${i === 0 ? -80 : 20}px)` }),
@@ -526,24 +526,24 @@ export default function HowItWorks() {
           position: relative;
           width: 100%;
           max-width: 1250px;
-          padding: 0 15px;
+          padding: 0 40px;
           height: 480px;
           flex-shrink: 0;
           z-index: 2;
 
           /* Precise vertical aspect-ratio coordinate variables */
-          --w-svg: calc(100% - 30px);
+          --w-svg: calc(100% - 80px);
           --h-svg: calc(var(--w-svg) / 2.857);
           --offset-y: calc((480px - var(--h-svg)) / 2);
         }
 
         .wave-svg {
           position: absolute;
-          left: 15px;
-          right: 15px;
+          left: 40px;
+          right: 40px;
           top: 0;
           bottom: 0;
-          width: calc(100% - 30px);
+          width: calc(100% - 80px);
           height: 100%;
         }
 
@@ -743,9 +743,11 @@ export default function HowItWorks() {
           .mob-timeline {
             display: flex;
           }
-          .fade-top,
+          .fade-top {
+            height: 80px;
+          }
           .fade-bottom {
-            display: none;
+            height: 100px;
           }
         }
 

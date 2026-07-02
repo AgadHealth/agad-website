@@ -1,6 +1,23 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { Mail } from "lucide-react";
+
+const InstagramIcon = () => (
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="instagram-svg">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+    <circle cx="12" cy="12" r="4" />
+    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" className="instagram-dot" />
+  </svg>
+);
+
+const LinkedinIcon = () => (
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" className="linkedin-svg">
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect x="2" y="9" width="4" height="12" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
+);
 
 
 export default function Waitlist() {
@@ -303,6 +320,19 @@ export default function Waitlist() {
     <>
       <section id="waitlist" className="waitlist">
 
+        <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true">
+          <defs>
+            <linearGradient id="socialsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#0ea5e9" />
+              <stop offset="100%" stopColor="#0284c7" />
+            </linearGradient>
+            <linearGradient id="socialsGradHover" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#0284c7" />
+              <stop offset="100%" stopColor="#015a87" />
+            </linearGradient>
+          </defs>
+        </svg>
+
         <div className="content">
 
           <h2>Get Early Access</h2>
@@ -349,6 +379,18 @@ export default function Waitlist() {
               Join <strong>1,000+</strong> others on the waitlist
             </span>
 
+          </div>
+
+          <div className="waitlist-socials">
+            <a href="https://www.instagram.com/reach.agad?igsh=MW5kNTIwZzl6Y3BpdQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="social-btn">
+              <InstagramIcon />
+            </a>
+            <a href="https://www.linkedin.com/company/reachagad/posts/?feedView=all" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="social-btn">
+              <LinkedinIcon />
+            </a>
+            <a href="mailto:reach.agad@gmail.com" aria-label="Email" className="social-btn">
+              <Mail size={20} />
+            </a>
           </div>
 
         </div>
@@ -511,7 +553,7 @@ p{
 
   border-radius:999px;
 
-  background:#2563EB;
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
 
   color:white;
 
@@ -521,15 +563,17 @@ p{
 
   cursor:pointer;
 
-  transition:.3s;
+  transition: all 0.22s ease;
+
+  box-shadow: 0 4px 18px rgba(14,165,233,0.35);
 
 }
 
 .inputBox button:hover{
 
-  background:#1D4ED8;
-
   transform:translateY(-2px);
+
+  box-shadow: 0 8px 24px rgba(14,165,233,0.48);
 
 }
 
@@ -592,6 +636,91 @@ p{
 
   color:#111827;
 
+}
+
+.waitlist-socials {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 15px rgba(14, 165, 233, 0.1);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.social-btn svg {
+  stroke: url(#socialsGrad);
+  transition: stroke 0.25s ease, fill 0.25s ease;
+}
+
+.social-btn .instagram-dot {
+  fill: url(#socialsGrad);
+  transition: fill 0.25s ease;
+}
+
+.social-btn .linkedin-svg {
+  fill: url(#socialsGrad);
+  transition: fill 0.25s ease;
+}
+
+.social-btn:hover {
+  background: rgba(255, 255, 255, 0.85);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(14, 165, 233, 0.22);
+  border-color: rgba(14, 165, 233, 0.3);
+}
+
+.social-btn:hover svg {
+  stroke: url(#socialsGradHover);
+}
+
+.social-btn:hover .instagram-dot {
+  fill: url(#socialsGradHover);
+}
+
+.social-btn:hover .linkedin-svg {
+  fill: url(#socialsGradHover);
+}
+
+.social-btn:focus,
+.social-btn:active,
+.social-btn:visited {
+  outline: none;
+  box-shadow: 0 4px 15px rgba(14, 165, 233, 0.1);
+  background: rgba(255, 255, 255, 0.45);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.social-btn:focus svg,
+.social-btn:active svg,
+.social-btn:visited svg {
+  stroke: url(#socialsGrad) !important;
+}
+
+.social-btn:focus .linkedin-svg,
+.social-btn:active .linkedin-svg,
+.social-btn:visited .linkedin-svg {
+  fill: url(#socialsGrad) !important;
+}
+
+.social-btn:focus .instagram-dot,
+.social-btn:active .instagram-dot,
+.social-btn:visited .instagram-dot {
+  fill: url(#socialsGrad) !important;
 }
 
 /* ====================== */
@@ -732,7 +861,7 @@ p{
 
   border-radius:16px;
 
-  background:#2563EB;
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
 
   color:white;
 
@@ -741,6 +870,18 @@ p{
   font-weight:700;
 
   cursor:pointer;
+
+  transition: all 0.22s ease;
+
+  box-shadow: 0 4px 18px rgba(14,165,233,0.3);
+
+}
+
+.modal button:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 24px rgba(14,165,233,0.42);
 
 }
 
