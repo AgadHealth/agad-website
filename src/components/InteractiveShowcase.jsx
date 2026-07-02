@@ -129,6 +129,7 @@ export default function InteractiveShowcase() {
                     onChange={(e) => setName(e.target.value)}
                     className="wl-input"
                     id="waitlist-name"
+                    aria-label="Your name"
                   />
                 </div>
                 <div className="input-group">
@@ -139,6 +140,7 @@ export default function InteractiveShowcase() {
                     onChange={(e) => { setEmail(e.target.value); setError(""); }}
                     className={`wl-input${error ? " input-error" : ""}`}
                     id="waitlist-email-showcase"
+                    aria-label="Email address"
                   />
                   {error && <p className="error-text">{error}</p>}
                 </div>
