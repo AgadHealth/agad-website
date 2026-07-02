@@ -6,7 +6,7 @@ import Features from "@/components/Features";
 import Waitlist from "@/components/Waitlist";
 import HowItWorks from "@/components/HowItWorks";
 import Footer from "@/components/Footer";
-import { ArrowRight, Heart, Shield, Activity, Users } from "lucide-react";
+import { ArrowRight, Shield } from "lucide-react";
 
 export default function Home() {
   const [visible, setVisible] = useState(false);
@@ -68,11 +68,11 @@ export default function Home() {
 
               {/* CTAs — outline ghost + solid filled (like Fintpay "Explore APIs" + "Get in Touch") */}
               <div className="hero-actions">
-                <a href="#features" className="cta-outline">
-                  Explore Features
-                </a>
                 <a href="#waitlist" className="cta-filled">
                   Join Waitlist
+                </a>
+                <a href="#features" className="cta-outline">
+                  Explore Features
                 </a>
               </div>
             </div>
@@ -219,7 +219,7 @@ export default function Home() {
           align-items: center;
           justify-content: flex-start;
           padding: 0;
-          overflow: visible;
+          overflow: hidden;
           max-width: 100% !important;
           margin: 0 !important;
         }
@@ -427,6 +427,7 @@ export default function Home() {
           align-items: center;
           /* Extra padding so absolute cards don't clip */
           padding: 0 120px 100px;
+          overflow: visible;
           opacity: 0;
           transform: translateY(32px);
           transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1) 0.22s,

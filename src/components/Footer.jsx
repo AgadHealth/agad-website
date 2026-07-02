@@ -1,45 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { Mail, Phone, MapPin } from "lucide-react";
 
-const LAUNCH_DATE = new Date("2026-09-01T00:00:00");
-
-function useCountdown(target) {
-  const [t, setT] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-  useEffect(() => {
-    function calc() {
-      const diff = Math.max(0, target - new Date());
-      setT({
-        days: Math.floor(diff / 86400000),
-        hours: Math.floor((diff / 3600000) % 24),
-        minutes: Math.floor((diff / 60000) % 60),
-        seconds: Math.floor((diff / 1000) % 60),
-      });
-    }
-    calc();
-    const id = setInterval(calc, 1000);
-    return () => clearInterval(id);
-  }, []);
-  return t;
-}
-
 export default function Footer() {
-  const { days, hours, minutes, seconds } = useCountdown(LAUNCH_DATE);
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState("");
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setError("Please enter a valid email address.");
-      return;
-    }
-    setError("");
-    setSubmitted(true);
-  }
-
   return (
     <footer id="download" className="footer">
       {/* Background decoration matching hero section */}
@@ -68,7 +31,7 @@ export default function Footer() {
           <div className="footer-column">
             <h4>Application</h4>
             <a href="#features">Features</a>
-            <a href="#showcase">Waitlist</a>
+            <a href="#waitlist">Waitlist</a>
             <a href="#how-it-works">How It Works</a>
           </div>
 
@@ -93,8 +56,8 @@ export default function Footer() {
         <div className="footer-bottom">
           <p>© 2026 Agad Health. All rights reserved.</p>
           <div className="social-links">
-            <a href="https://linkedin.com/company/agadhealth" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="https://instagram.com/agad.health" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.linkedin.com/company/reachagad/posts/?feedView=all" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://www.instagram.com/reach.agad?igsh=MW5kNTIwZzl6Y3BpdQ==" target="_blank" rel="noopener noreferrer">Instagram</a>
           </div>
         </div>
       </div>
@@ -273,14 +236,6 @@ export default function Footer() {
         }
 
         @media (max-width: 992px) {
-          .download-cta-banner {
-            flex-direction: column;
-            padding: 40px;
-            align-items: stretch;
-            transform: translateY(-30px);
-            margin: 0 20px;
-          }
-
           .footer-grid {
             grid-template-columns: 1.25fr 0.75fr;
             gap: 35px;
@@ -323,12 +278,6 @@ export default function Footer() {
           .footer-bottom {
             flex-direction: column;
             text-align: center;
-          }
-          .download-cta-banner {
-            padding: 32px 24px;
-          }
-          .cta-title {
-            font-size: 1.8rem;
           }
         }
       `}</style>

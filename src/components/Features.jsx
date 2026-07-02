@@ -160,16 +160,20 @@ export default function Features() {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          border: 1px solid rgba(99, 102, 241, 0.08);
+          border: 1px solid rgba(14, 165, 233, 0.08);
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.02);
-          transition: transform 0.4s cubic-bezier(0.2, 1, 0.2, 1), box-shadow 0.4s ease;
+          transition: transform 0.4s cubic-bezier(0.2, 1, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease;
           height: 600px;
           position: relative;
         }
 
         .feature-card-new:hover {
           transform: translateY(-8px);
-          box-shadow: 0 20px 40px rgba(99, 102, 241, 0.08), 0 4px 12px rgba(0, 0, 0, 0.02);
+          border-color: rgba(14, 165, 233, 0.45);
+          box-shadow: 
+            0 22px 48px rgba(14, 165, 233, 0.2), 
+            0 0 32px rgba(14, 165, 233, 0.28),
+            0 4px 12px rgba(0, 0, 0, 0.02);
         }
 
         .card-text-content {
