@@ -3,6 +3,8 @@ const express = require("express");
 const cors = require("cors");
 const { createClient } = require("@supabase/supabase-js");
 const nodemailer = require("nodemailer");
+const path = require("path");
+
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -84,6 +86,11 @@ async function sendWelcomeEmail(toEmail, toName) {
     .h1-mobile { font-size: 27px !important; line-height: 34px !important; }
     .hero-svg { width: 100% !important; height: auto !important; }
   }
+
+  @media (prefers-color-scheme: dark) {
+    .logo-img { filter: invert(1) !important; }
+    u + .body .logo-img { filter: invert(1) !important; }
+  }
 </style>
 </head>
 <body style="margin:0; padding:0; background-color:#0E2A52;">
@@ -96,7 +103,7 @@ async function sendWelcomeEmail(toEmail, toName) {
     <tr>
       <td align="center" class="outer-pad" style="padding: 56px 20px;">
 
-        <table role="presentation" width="600" cellpadding="0" cellspacing="0" class="container" style="width:600px; max-width:600px; background-color:#FFFFFF; border-radius:18px; overflow:hidden;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="container" style="width:100%; max-width:600px; background-color:#FFFFFF; border-radius:18px; overflow:hidden;">
 
           <!-- Wordmark + top rule -->
           <tr>
@@ -107,7 +114,7 @@ async function sendWelcomeEmail(toEmail, toName) {
                     <table role="presentation" cellpadding="0" cellspacing="0">
                       <tr>
                         <td valign="middle" style="padding-right:8px;">
-                          <img src="https://i.ibb.co/cKHGJrJY/Agadh-logo-low-resl.png" width="26" height="26" alt="AGAD" style="display:block; border-radius:7px;" />
+                          <img src="cid:logo" class="logo-img" width="26" height="26" alt="AGAD" style="display:block; border-radius:7px;" />
                         </td>
                         <td valign="middle">
                           <span class="display" style="font-size:21px; font-weight:600; color:#0F2A4A; letter-spacing:0.5px;">AGAD</span>
@@ -126,8 +133,8 @@ async function sendWelcomeEmail(toEmail, toName) {
 
           <!-- Hero illustration panel -->
           <tr>
-            <td style="background-color:#DCEBFC; padding: 0;">
-              <img src="https://i.ibb.co/8D46TFSf/unnamed.png" width="600" height="300" class="hero-svg" style="display:block; border:0; width:100%; height:auto;" alt="AGAD Illustration" />
+            <td style="background-color:#FFFFFF; background: linear-gradient(to bottom, #FFFFFF, #FFFFFF) !important; padding: 0;">
+              <img src="cid:banner" width="600" class="hero-svg" style="display:block; border:0; width:100%; height:auto; background: linear-gradient(to bottom, #FFFFFF, #FFFFFF) !important;" alt="AGAD Illustration" />
             </td>
           </tr>
 
@@ -316,7 +323,19 @@ async function sendWelcomeEmail(toEmail, toName) {
 
 </body>
 </html>
-    `
+    `,
+    attachments: [
+      {
+        filename: "logo-test.png",
+        path: path.join(__dirname, "logo-test.png"),
+        cid: "logo"
+      },
+      {
+        filename: "banner-test.png",
+        path: path.join(__dirname, "banner-test.png"),
+        cid: "banner"
+      }
+    ]
   };
 
   await mailer.sendMail(mailOptions);
