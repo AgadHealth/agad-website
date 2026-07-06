@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import Link from "next/link";
 
-export default function Navbar() {
+export default function Navbar({ solidBg = false }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -21,30 +22,34 @@ export default function Navbar() {
   }, [mobileOpen]);
 
   return (
-    <header className={`navbar-header ${isScrolled ? "scrolled" : ""}`}>
+    <header className={`navbar-header ${isScrolled || solidBg ? "scrolled" : ""}`}>
       <div className="navbar-container">
 
         {/* Logo */}
-        <a href="#hero" className="navbar-logo">
-          {/* Clip wrapper cuts away the white square corners of the PNG */}
-          <div className="logo-clip">
-            <img src="/logo.png" alt="Agad logo" className="logo-img" />
-          </div>
-          <span className="logo-text">Agad</span>
-        </a>
+        <Link href="/#hero" legacyBehavior>
+          <a className="navbar-logo">
+            {/* Clip wrapper cuts away the white square corners of the PNG */}
+            <div className="logo-clip">
+              <img src="/logo.png" alt="Agad logo" className="logo-img" />
+            </div>
+            <span className="logo-text">Agad</span>
+          </a>
+        </Link>
 
         {/* Desktop nav links */}
         <nav className="navbar-links" aria-label="Main navigation">
-          <a href="#features"    className="nav-link">Features</a>
-          <a href="#how-it-works" className="nav-link">How It Works</a>
-          <a href="#download"    className="nav-link">Contact Us</a>
+          <Link href="/#features" legacyBehavior><a className="nav-link">Features</a></Link>
+          <Link href="/#how-it-works" legacyBehavior><a className="nav-link">How It Works</a></Link>
+          <Link href="/#download" legacyBehavior><a className="nav-link">Contact Us</a></Link>
         </nav>
 
         {/* CTA */}
         <div className="navbar-actions">
-          <a href="#waitlist" className="nav-cta">
-            Get Agad
-          </a>
+          <Link href="/#waitlist" legacyBehavior>
+            <a className="nav-cta">
+              Get Agad
+            </a>
+          </Link>
 
           {/* Mobile hamburger */}
           <button
@@ -62,10 +67,10 @@ export default function Navbar() {
       {/* Mobile dropdown */}
       {mobileOpen && (
         <div className="mobile-menu" onClick={e => e.stopPropagation()}>
-          <a href="#features"     className="mobile-link" onClick={() => setMobileOpen(false)}>Features</a>
-          <a href="#how-it-works" className="mobile-link" onClick={() => setMobileOpen(false)}>How It Works</a>
-          <a href="#download"     className="mobile-link" onClick={() => setMobileOpen(false)}>Contact Us</a>
-          <a href="#waitlist"     className="mobile-cta"  onClick={() => setMobileOpen(false)}>Get Agad</a>
+          <Link href="/#features" legacyBehavior><a className="mobile-link" onClick={() => setMobileOpen(false)}>Features</a></Link>
+          <Link href="/#how-it-works" legacyBehavior><a className="mobile-link" onClick={() => setMobileOpen(false)}>How It Works</a></Link>
+          <Link href="/#download" legacyBehavior><a className="mobile-link" onClick={() => setMobileOpen(false)}>Contact Us</a></Link>
+          <Link href="/#waitlist" legacyBehavior><a className="mobile-cta" onClick={() => setMobileOpen(false)}>Get Agad</a></Link>
         </div>
       )}
 
