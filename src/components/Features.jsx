@@ -21,9 +21,9 @@ export default function Features() {
         {/* Card 2: AI Coach */}
         <div className="feature-card-new">
           <div className="card-text-content">
-            <h3 className="card-title-new">PERSONALIZED AI<br />HEALTH COACH.</h3>
+            <h3 className="card-title-new">INSTANT ACCESS.<br />YOUR CONTROL.</h3>
             <p className="card-desc-new">
-              Receive smart insights and actionable advice tailored to your biometrics.
+              Share your health profile with any doctor in seconds using your unique Patient ID or QR code.
             </p>
           </div>
           
@@ -45,9 +45,9 @@ export default function Features() {
         {/* Card 1: Track Vitals */}
         <div className="feature-card-new">
           <div className="card-text-content">
-            <h3 className="card-title-new">TRACK VITALS.<br />NO EFFORT.</h3>
+            <h3 className="card-title-new">YOU DECIDE.<br />ALWAYS.</h3>
             <p className="card-desc-new">
-              Seamlessly syncs with your wearables for real-time heart rate and activity metrics.
+              Grant, limit, or revoke access to your records anytime, every action is logged and consent-verified.
             </p>
           </div>
           
@@ -71,9 +71,9 @@ export default function Features() {
         {/* Card 3: Expert Care */}
         <div className="feature-card-new">
           <div className="card-text-content">
-            <h3 className="card-title-new">EXPERT CARE.<br />ANYWHERE.</h3>
+            <h3 className="card-title-new">ALL RECORDS.<br />ONE VAULT.</h3>
             <p className="card-desc-new">
-              Instantly connect with certified medical experts, nutritionists, and mental health professionals.
+              Securely store and access your lab reports, prescriptions, and diagnostics anytime, anywhere.
             </p>
           </div>
           

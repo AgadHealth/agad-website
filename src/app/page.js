@@ -70,7 +70,6 @@ export default function Home() {
               <div className="hero-badge">
                 <span className="badge-tag">New</span>
                 <span className="badge-text">Your Smart Health Companion</span>
-                <ArrowRight size={11} strokeWidth={2.5} />
               </div>
 
               <h1 className="hero-headline">
@@ -157,10 +156,10 @@ export default function Home() {
               <div className={`float-card card-tr ${visible ? "card-in" : ""}`}>
                 <div className="fc-header">
                   <div className="fc-icon-wrap"><Shield size={12} /></div>
-                  <span className="fc-label">Health Score</span>
-                  <div className="fc-badge-blue">Optimal</div>
+                  <span className="fc-label">RECORDS</span>
+                  <div className="fc-badge-blue">Synced</div>
                 </div>
-                <p className="fc-big-num">98<span className="fc-big-pct">%</span></p>
+                <p className="fc-big-num">100<span className="fc-big-pct">%</span></p>
               </div>
 
               {/* Phone centered */}
@@ -177,12 +176,12 @@ export default function Home() {
               {/* Floating card — bottom left, like Fintpay "Secure Digital payments / 2.5M" */}
               <div className={`float-card card-bl ${visible ? "card-in" : ""}`}>
                 <div className="fc-avatars">
-                  <div className="fca fca-1" />
-                  <div className="fca fca-2" />
-                  <div className="fca fca-3" />
+                  <img src="https://ik.imagekit.io/zftua2pck/3.png" alt="" className="fca fca-1" />
+                  <img src="https://ik.imagekit.io/zftua2pck/Untitled.png" alt="" className="fca fca-2" />
+                  <img src="https://ik.imagekit.io/zftua2pck/1.png" alt="" className="fca fca-3" />
                 </div>
                 <div className="fc-count-block">
-                  <p className="fc-count">1,200+</p>
+                  <p className="fc-count">120+</p>
                   <p className="fc-count-sub">On Waitlist</p>
                 </div>
               </div>
@@ -698,6 +697,7 @@ export default function Home() {
           border: 2px solid #fff;
           margin-left: -7px;
           flex-shrink: 0;
+          object-fit: cover;
         }
         .fca:first-child { margin-left: 0; }
         .fca-1 { background: linear-gradient(135deg, #38bdf8, #0284c7); }

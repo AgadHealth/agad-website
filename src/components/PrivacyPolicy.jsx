@@ -10,10 +10,9 @@ export default function PrivacyPolicy() {
       <Navbar solidBg />
 
       <main className="policy-main">
-        {/* Background glow effects */}
-        <div className="policy-bg" aria-hidden="true">
-          <div className="policy-bg-glow" />
-          <div className="policy-bg-dots" />
+        {/* Aurora Background */}
+        <div className="aurora-container" aria-hidden="true">
+          <div className="aurora-effect" />
         </div>
 
         <section className="policy-hero">
@@ -23,7 +22,7 @@ export default function PrivacyPolicy() {
             </div>
             <h1 className="policy-title">Privacy Policy</h1>
             <p className="policy-subtitle">
-              Agad Health Technologies | Effective Date: 05-07-2026
+              Agad Health | Effective Date: 05-07-2026
             </p>
           </div>
         </section>
@@ -92,6 +91,9 @@ export default function PrivacyPolicy() {
 
       <style jsx>{`
         .policy-wrapper {
+          --primary-navy: #0f172a;
+          --secondary-blue: #0284c7;
+          --text-gradient: linear-gradient(135deg, #0f172a 20%, #1e4e79 60%, #0284c7 100%);
           min-height: 100vh;
           display: flex;
           flex-direction: column;
@@ -106,35 +108,61 @@ export default function PrivacyPolicy() {
           padding-top: 68px; /* Offset for fixed navbar */
         }
 
-        .policy-bg {
+        .aurora-container {
           position: absolute;
           inset: 0;
+          overflow: hidden;
           pointer-events: none;
           z-index: -1;
-          overflow: hidden;
         }
 
-        .policy-bg-glow {
+        .aurora-effect {
+          --white: #fff;
+          --black: #000;
+          --transparent: transparent;
+          --blue-500: #0284c7;
+          --indigo-300: #7dd3fc;
+          --blue-300: #38bdf8;
+          --violet-200: #e0f2fe;
+          --blue-400: #0ea5e9;
+
+          --white-gradient: repeating-linear-gradient(100deg, var(--white) 0%, var(--white) 7%, var(--transparent) 10%, var(--transparent) 12%, var(--white) 16%);
+          --aurora: repeating-linear-gradient(100deg, var(--blue-500) 10%, var(--indigo-300) 15%, var(--blue-300) 20%, var(--violet-200) 25%, var(--blue-400) 30%);
+
           position: absolute;
-          top: 0;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 100%;
-          max-width: 1400px;
-          height: 600px;
-          background: radial-gradient(
-            ellipse 80% 50% at 50% 0%,
-            rgba(58, 134, 255, 0.15) 0%,
-            rgba(0, 245, 212, 0.04) 50%,
-            transparent 100%
-          );
+          top: -10px;
+          left: -10px;
+          right: -10px;
+          bottom: -10px;
+          opacity: 0.3;
+          will-change: transform;
+          filter: blur(10px) invert(1);
+          background-image: var(--white-gradient), var(--aurora);
+          background-size: 300% 200%;
+          background-position: 50% 50%, 50% 50%;
+          
+          -webkit-mask-image: radial-gradient(ellipse at 100% 0%, black 10%, transparent 70%);
+          mask-image: radial-gradient(ellipse at 100% 0%, black 10%, transparent 70%);
         }
 
-        .policy-bg-dots {
+        .aurora-effect::after {
+          content: "";
           position: absolute;
           inset: 0;
-          background-image: radial-gradient(circle, rgba(11, 19, 43, 0.03) 1px, transparent 1px);
-          background-size: 30px 30px;
+          background-image: var(--white-gradient), var(--aurora);
+          background-size: 200% 100%;
+          background-attachment: fixed;
+          mix-blend-mode: difference;
+          animation: aurora 60s linear infinite;
+        }
+
+        @keyframes aurora {
+          from {
+            background-position: 50% 50%, 50% 50%;
+          }
+          to {
+            background-position: 350% 50%, 350% 50%;
+          }
         }
 
         .policy-hero {
@@ -154,8 +182,8 @@ export default function PrivacyPolicy() {
           width: 56px;
           height: 56px;
           border-radius: 16px;
-          background: rgba(58, 134, 255, 0.08);
-          border: 1px solid rgba(58, 134, 255, 0.15);
+          background: rgba(14, 165, 233, 0.08);
+          border: 1px solid rgba(14, 165, 233, 0.15);
           margin-bottom: 24px;
         }
 
@@ -258,8 +286,8 @@ export default function PrivacyPolicy() {
         }
 
         .contact-details {
-          background: rgba(58, 134, 255, 0.04);
-          border: 1px dashed rgba(58, 134, 255, 0.2);
+          background: rgba(14, 165, 233, 0.04);
+          border: 1px dashed rgba(14, 165, 233, 0.2);
           border-radius: var(--radius-md);
           padding: 24px;
           margin-top: 16px;

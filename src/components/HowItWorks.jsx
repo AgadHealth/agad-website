@@ -14,8 +14,27 @@ export default function HowItWorks() {
   const pathRef = useRef(null); // animated SVG path
   const nodeRefs = [useRef(null), useRef(null), useRef(null)];
   const labelRefs = [useRef(null), useRef(null), useRef(null)];
-  const ghostRefs = [useRef(null), useRef(null), useRef(null)];
   const [activeStep, setActiveStep] = useState(0);
+
+  useEffect(() => {
+    const handleGlobalMouseMove = (e) => {
+      labelRefs.forEach((ref) => {
+        const border = ref.current;
+        if (!border) return;
+        const rect = border.getBoundingClientRect();
+        const x = e.clientX - (rect.left + rect.width / 2);
+        const y = e.clientY - (rect.top + rect.height / 2);
+        const angle = Math.atan2(y, x);
+        border.style.setProperty("--rotation", `${angle}rad`);
+      });
+    };
+
+    window.addEventListener("mousemove", handleGlobalMouseMove);
+    return () => {
+      window.removeEventListener("mousemove", handleGlobalMouseMove);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const steps = [
     {
@@ -29,14 +48,14 @@ export default function HowItWorks() {
       icon: <UserPlus size={19} strokeWidth={2} />,
       num: "2",
       title: "Set Up Your Profile",
-      desc: "Enter your health baseline, connect wearable trackers, and let Agad build your personalized health dashboard.",
+      desc: "Create your health profile and get your unique Patient ID, the key to your records and secure sharing, generated instantly..",
       pos: "above",
     },
     {
       icon: <Heart size={19} strokeWidth={2} />,
       num: "3",
-      title: "Instant Care & Advice",
-      desc: "Connect with certified doctors in minutes, get smart pill reminders, and receive real-time cardiovascular insights.",
+      title: "Share & Get Care",
+      desc: "Share your records with any doctor in seconds using your Patient ID or QR code, with full control over what's shared and for how long.",
       pos: "above",
     },
   ];
@@ -125,7 +144,6 @@ export default function HowItWorks() {
             duration: 0.6,
             ease: "back.out(2)",
           })
-          .to(ghostRefs[0].current, { opacity: 1, duration: 0.6 }, "<")
           .to(labelRefs[0].current, { opacity: 1, y: 0, duration: 0.6 }, "<")
 
           // pause to let step 1 sit
@@ -147,7 +165,6 @@ export default function HowItWorks() {
             { scale: 1.15, svgOrigin: `${NODES[1].cx} ${NODES[1].cy}`, duration: 0.6, ease: "back.out(2)" },
             "-=0.3"
           )
-          .to(ghostRefs[1].current, { opacity: 1, duration: 0.6 }, "<")
           .to(labelRefs[1].current, { opacity: 1, y: 0, duration: 0.6 }, "<")
 
           // pause to let step 2 sit
@@ -169,7 +186,6 @@ export default function HowItWorks() {
             { scale: 1.15, svgOrigin: `${NODES[2].cx} ${NODES[2].cy}`, duration: 0.6, ease: "back.out(2)" },
             "-=0.3"
           )
-          .to(ghostRefs[2].current, { opacity: 1, duration: 0.6 }, "<")
           .to(labelRefs[2].current, { opacity: 1, y: 0, duration: 0.6 }, "<")
 
           // hold final state briefly before unpinning
@@ -255,18 +271,6 @@ export default function HowItWorks() {
 
       {/* ══ DESKTOP WAVE SCENE ══ */}
       <div className="wave-scene">
-        {/* Ghost step numbers */}
-        {/* Ghost step numbers */}
-        {NODES.map((n, i) => (
-          <span
-            key={i}
-            ref={ghostRefs[i]}
-            className="ghost-num"
-            style={{ left: `calc(40px + ((${n.cx} + 60) / 1120) * (100% - 80px))` }}
-          >
-            {i + 1}
-          </span>
-        ))}
 
         {/* SVG wave */}
         <svg
@@ -377,9 +381,11 @@ export default function HowItWorks() {
               }}
             >
               <div ref={labelRefs[i]} className="sl-card">
-                <h3 className="sl-num">Step {step.num}</h3>
-                <h4 className="sl-title">{step.title}</h4>
-                <p className="sl-desc">{step.desc}</p>
+                <div className="sl-card-inner">
+                  <h3 className="sl-num">Step {step.num}</h3>
+                  <h4 className="sl-title">{step.title}</h4>
+                  <p className="sl-desc">{step.desc}</p>
+                </div>
               </div>
               <div className={`sl-connector ${activeStep > i ? "conn-on" : ""}`} />
             </div>
@@ -571,21 +577,6 @@ export default function HowItWorks() {
           color: #ffffff;
         }
 
-        .ghost-num {
-          position: absolute;
-          top: 50%;
-          transform: translate(-50%, -50%);
-          font-size: clamp(7rem, 11vw, 10rem);
-          font-weight: 900;
-          letter-spacing: -0.06em;
-          line-height: 1;
-          user-select: none;
-          pointer-events: none;
-          color: rgba(14, 165, 233, 0.05);
-          opacity: 0;
-          z-index: 0;
-        }
-
         .step-label {
           position: absolute;
           width: 195px;
@@ -603,16 +594,34 @@ export default function HowItWorks() {
         }
 
         .sl-card {
+          position: relative;
           width: 100%;
-          background: rgba(255, 255, 255, 0.7);
-          border: 1px solid rgba(160, 200, 225, 0.45);
+          border: 2px solid transparent;
           border-radius: 18px;
+          background-origin: border-box;
+          background-clip: padding-box, border-box;
+          background-image: linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)), 
+                            conic-gradient(from var(--rotation, 0deg), #0ea5e9 0deg, #0ea5e9 90deg, rgba(160, 200, 225, 0.35) 90deg, rgba(160, 200, 225, 0.35) 360deg);
           padding: 16px 18px;
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
           box-shadow: 0 4px 20px rgba(20, 60, 100, 0.07), 0 1px 6px rgba(20, 60, 100, 0.04);
           opacity: 0;
           transform: translateY(12px);
+          overflow: hidden;
+        }
+        .sl-card::before {
+          content: "";
+          position: absolute;
+          inset: 2px;
+          background: rgba(255, 255, 255, 0.75);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border-radius: 16px;
+          z-index: 1;
+          pointer-events: none;
+        }
+        .sl-card-inner {
+          position: relative;
+          z-index: 2;
         }
         .step-below .sl-card {
           transform: translateY(-12px);

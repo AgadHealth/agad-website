@@ -24,7 +24,7 @@ export default function Footer() {
               <span className="logo-text">Agad</span>
             </div>
             <p className="brand-tagline">
-              Your health, in your hands. Agad connects you to certified doctors, tracks your vitals, and keeps you on schedule — all from one clean app.
+              Your health, in your hands. Agad stores your medical records, lets you share them with any doctor in seconds, and keeps every access consent-verified, all from one secure app.
             </p>
           </div>
 
@@ -39,7 +39,6 @@ export default function Footer() {
           {/* Legal / Policy */}
           <div className="footer-column">
             <h4>Trust & Privacy</h4>
-            <Link href="/#download" legacyBehavior><a>Security Compliance</a></Link>
             <Link href="/privacy" legacyBehavior><a>Privacy Policy</a></Link>
             <Link href="/terms" legacyBehavior><a>Terms of Service</a></Link>
           </div>
@@ -49,7 +48,7 @@ export default function Footer() {
             <h4>Contact Info</h4>
             <a href="mailto:reach.agad@gmail.com" className="contact-item"><Mail size={14} /> reach.agad@gmail.com</a>
             <a href="https://maps.google.com/?q=Bhubaneswar,India" target="_blank" rel="noopener noreferrer" className="contact-item"><MapPin size={14} /> Bhubaneswar, India</a>
-            <a href="tel:+919876543210" className="contact-item"><Phone size={14} /> +91 98765 43210</a>
+            <a href="tel:+919876543210" className="contact-item"><Phone size={14} /> +91 82876 13610</a>
           </div>
         </div>
 

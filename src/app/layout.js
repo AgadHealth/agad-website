@@ -16,7 +16,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={outfit.variable}>
+    <html lang="en" className={outfit.variable} suppressHydrationWarning>
       <head>
         <link rel="icon" href="/logo.png" type="image/png" />
       </head>
