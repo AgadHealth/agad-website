@@ -22,7 +22,7 @@ export default function TermsAndConditions() {
             </div>
             <h1 className="terms-title">Terms & Conditions</h1>
             <p className="terms-subtitle">
-              Agad Health Technologies | Effective Date: 05-07-2026
+              Agad Health | Effective Date: 05-07-2026
             </p>
           </div>
         </section>

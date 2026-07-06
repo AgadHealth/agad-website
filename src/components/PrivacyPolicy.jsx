@@ -22,7 +22,7 @@ export default function PrivacyPolicy() {
             </div>
             <h1 className="policy-title">Privacy Policy</h1>
             <p className="policy-subtitle">
-              Agad Health Technologies | Effective Date: 05-07-2026
+              Agad Health | Effective Date: 05-07-2026
             </p>
           </div>
         </section>

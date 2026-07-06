@@ -388,14 +388,14 @@ export default function Waitlist() {
 
             <div className="avatars">
 
-              <img src="https://i.pravatar.cc/100?img=12" alt="" />
-              <img src="https://i.pravatar.cc/100?img=14" alt="" />
-              <img src="https://i.pravatar.cc/100?img=16" alt="" />
+              <img src="https://ik.imagekit.io/zftua2pck/3.png" alt="" />
+              <img src="https://ik.imagekit.io/zftua2pck/Untitled.png" alt="" />
+              <img src="https://ik.imagekit.io/zftua2pck/1.png" alt="" />
 
             </div>
 
             <span>
-              Join <strong>1,000+</strong> others on the waitlist
+              Join <strong>120+</strong> others on the waitlist
             </span>
 
           </div>
