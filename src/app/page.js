@@ -13,12 +13,23 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      if ("scrollRestoration" in window.history) {
+        window.history.scrollRestoration = "manual";
+      }
+      window.scrollTo(0, 0);
+      if (window.location.hash) {
+        window.history.replaceState(null, null, window.location.pathname + window.location.search);
+      }
+    }
+
     const show = setTimeout(() => {
       setVisible(true);
     }, 80);
 
     const loader = setTimeout(() => {
       setLoading(false);
+      window.scrollTo(0, 0);
     }, 2400);
 
     return () => {

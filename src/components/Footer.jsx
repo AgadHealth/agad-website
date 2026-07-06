@@ -1,6 +1,7 @@
 "use client";
 
 import { Mail, Phone, MapPin } from "lucide-react";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -30,17 +31,17 @@ export default function Footer() {
           {/* Site Sections */}
           <div className="footer-column">
             <h4>Application</h4>
-            <a href="#features">Features</a>
-            <a href="#waitlist">Waitlist</a>
-            <a href="#how-it-works">How It Works</a>
+            <Link href="/#features" legacyBehavior><a>Features</a></Link>
+            <Link href="/#waitlist" legacyBehavior><a>Waitlist</a></Link>
+            <Link href="/#how-it-works" legacyBehavior><a>How It Works</a></Link>
           </div>
 
           {/* Legal / Policy */}
           <div className="footer-column">
             <h4>Trust & Privacy</h4>
-            <a href="#download">Security Compliance</a>
-            <a href="#download">Privacy Policy</a>
-            <a href="#download">Terms of Service</a>
+            <Link href="/#download" legacyBehavior><a>Security Compliance</a></Link>
+            <Link href="/privacy" legacyBehavior><a>Privacy Policy</a></Link>
+            <Link href="/terms" legacyBehavior><a>Terms of Service</a></Link>
           </div>
 
           {/* Contact */}
