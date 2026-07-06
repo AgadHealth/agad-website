@@ -70,7 +70,6 @@ export default function Home() {
               <div className="hero-badge">
                 <span className="badge-tag">New</span>
                 <span className="badge-text">Your Smart Health Companion</span>
-                <ArrowRight size={11} strokeWidth={2.5} />
               </div>
 
               <h1 className="hero-headline">

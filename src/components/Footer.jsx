@@ -39,7 +39,6 @@ export default function Footer() {
           {/* Legal / Policy */}
           <div className="footer-column">
             <h4>Trust & Privacy</h4>
-            <Link href="/#download" legacyBehavior><a>Security Compliance</a></Link>
             <Link href="/privacy" legacyBehavior><a>Privacy Policy</a></Link>
             <Link href="/terms" legacyBehavior><a>Terms of Service</a></Link>
           </div>

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useLayoutEffect } from "react";
+import { createPortal } from "react-dom";
 import { Mail } from "lucide-react";
 
 const InstagramIcon = () => (
@@ -19,6 +20,77 @@ const LinkedinIcon = () => (
   </svg>
 );
 
+function TurnstileWidget({ sitekey, onSuccess, onError, onExpired }) {
+  const widgetIdRef = useRef(null);
+  const callbacksRef = useRef({ onSuccess, onError, onExpired });
+
+  // Keep callback refs up to date without re-triggering the layout effect
+  useEffect(() => {
+    callbacksRef.current = { onSuccess, onError, onExpired };
+  });
+
+  useLayoutEffect(() => {
+    let script = document.getElementById("cloudflare-turnstile-script");
+    if (!script) {
+      script = document.createElement("script");
+      script.id = "cloudflare-turnstile-script";
+      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+      script.async = true;
+      script.defer = true;
+      document.body.appendChild(script);
+    }
+
+    let interval;
+    let mounted = true;
+
+    const tryRender = () => {
+      if (!mounted) return;
+      if (typeof window !== "undefined" && window.turnstile) {
+        try {
+          if (widgetIdRef.current !== null) {
+            try {
+              window.turnstile.remove(widgetIdRef.current);
+            } catch (err) {
+              // stale widget
+            }
+            widgetIdRef.current = null;
+          }
+
+          const widgetId = window.turnstile.render("#turnstile-container", {
+            sitekey: sitekey,
+            callback: (token) => callbacksRef.current.onSuccess?.(token),
+            "error-callback": () => callbacksRef.current.onError?.(),
+            "expired-callback": () => callbacksRef.current.onExpired?.(),
+          });
+
+          widgetIdRef.current = widgetId;
+          if (interval) clearInterval(interval);
+        } catch (e) {
+          // container not ready yet
+        }
+      }
+    };
+
+    interval = setInterval(tryRender, 100);
+
+    return () => {
+      mounted = false;
+      if (interval) clearInterval(interval);
+      if (widgetIdRef.current !== null && typeof window !== "undefined" && window.turnstile) {
+        try {
+          window.turnstile.remove(widgetIdRef.current);
+        } catch (err) {
+          // stale widget
+        }
+        widgetIdRef.current = null;
+      }
+    };
+  }, [sitekey]);
+
+  return (
+    <div id="turnstile-container" style={{ marginTop: "16px", display: "flex", justifyContent: "center" }}></div>
+  );
+}
 
 export default function Waitlist() {
 
@@ -35,7 +107,6 @@ export default function Waitlist() {
 
   const [emailError, setEmailError] = useState("");
   const [modalError, setModalError] = useState("");
-  const turnstileWidgetIdRef = useRef(null);
 
   // Accessibility: focus the name input when the modal opens
   useEffect(() => {
@@ -136,71 +207,19 @@ export default function Waitlist() {
     };
   }, [showModal]);
 
+  // Prevent background scrolling when modal is open
   useEffect(() => {
     if (showModal) {
-      let script = document.getElementById("cloudflare-turnstile-script");
-      if (!script) {
-        script = document.createElement("script");
-        script.id = "cloudflare-turnstile-script";
-        script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
-        script.async = true;
-        script.defer = true;
-        document.body.appendChild(script);
-      }
-
-      let interval;
-      const tryRender = () => {
-        if (window.turnstile) {
-          try {
-            // Clean up previous widget instance if it exists
-            if (turnstileWidgetIdRef.current !== null) {
-              try {
-                window.turnstile.remove(turnstileWidgetIdRef.current);
-              } catch (err) {
-                // Stale widget instance
-              }
-              turnstileWidgetIdRef.current = null;
-            }
-
-            const widgetId = window.turnstile.render("#turnstile-container", {
-              sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA",
-              callback: (token) => {
-                setTurnstileToken(token);
-                if (modalError) setModalError("");
-              },
-              "error-callback": () => {
-                setTurnstileToken("");
-              },
-              "expired-callback": () => {
-                setTurnstileToken("");
-              },
-            });
-
-            turnstileWidgetIdRef.current = widgetId;
-
-            if (interval) clearInterval(interval);
-          } catch (e) {
-            // Container not ready or already rendered
-          }
-        }
-      };
-
-      interval = setInterval(tryRender, 100);
-
-      return () => {
-        if (interval) clearInterval(interval);
-        setTurnstileToken("");
-        if (turnstileWidgetIdRef.current !== null) {
-          try {
-            window.turnstile.remove(turnstileWidgetIdRef.current);
-          } catch (err) {
-            // Stale widget instance
-          }
-          turnstileWidgetIdRef.current = null;
-        }
-      };
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
     }
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [showModal]);
+
+
 
   const openModal = async () => {
 
@@ -395,75 +414,84 @@ export default function Waitlist() {
 
         </div>
 
-        {showModal && (
+      </section>
 
-          <div className={`modalOverlay ${isClosing ? "closing" : ""}`}>
+      {showModal && createPortal(
 
-            <div className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div className={`modalOverlay ${isClosing ? "closing" : ""}`}>
 
-              {!success ? (
+          <div className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
 
-                <>
+            {!success ? (
 
-                  <h3 id="modal-title">Almost there 👋</h3>
+              <div key="form-view">
 
-                  <p>
-                    Tell us your name to reserve your spot.
+                <h3 id="modal-title">Almost there 👋</h3>
+
+                <p>
+                  Tell us your name to reserve your spot.
+                </p>
+
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                    if (modalError) setModalError("");
+                  }}
+                  aria-label="Your Name"
+                />
+
+                <TurnstileWidget
+                  sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA"}
+                  onSuccess={(token) => {
+                    setTurnstileToken(token);
+                    if (modalError) setModalError("");
+                  }}
+                  onError={() => setTurnstileToken("")}
+                  onExpired={() => setTurnstileToken("")}
+                />
+
+                {modalError && (
+                  <p className="errorMessage" role="alert" style={{ marginTop: "14px", marginBottom: "0" }}>
+                    {modalError}
                   </p>
+                )}
 
-                  <input
-                    type="text"
-                    placeholder="Your Name"
-                    value={name}
-                    onChange={(e) => {
-                      setName(e.target.value);
-                      if (modalError) setModalError("");
-                    }}
-                    aria-label="Your Name"
-                  />
+                <button
+                  onClick={handleSubmit}
+                  disabled={loading || !turnstileToken}
+                >
+                  {loading ? "Joining..." : "Continue"}
+                </button>
 
-                  <div id="turnstile-container" style={{ marginTop: "16px", display: "flex", justifyContent: "center" }}></div>
+              </div>
 
-                  {modalError && (
-                    <p className="errorMessage" role="alert" style={{ marginTop: "14px", marginBottom: "0" }}>
-                      {modalError}
-                    </p>
-                  )}
+            ) : (
 
-                  <button
-                    onClick={handleSubmit}
-                    disabled={loading || !turnstileToken}
-                  >
-                    {loading ? "Joining..." : "Continue"}
-                  </button>
+              <div key="success-view" className="success">
 
-                </>
-
-              ) : (
-
-                <div className="success">
-
-                  <div className="tick">
-                    ✓
-                  </div>
-
-                  <h3 id="modal-title">You&apos;re on the list!</h3>
-
-                  <p>
-                    We&apos;ll notify you as soon as AGAD launches.
-                  </p>
-
+                <div className="tick">
+                  ✓
                 </div>
 
-              )}
+                <h3 id="modal-title">You&apos;re on the list!</h3>
 
-            </div>
+                <p>
+                  We&apos;ll notify you as soon as AGAD launches.
+                </p>
+
+              </div>
+
+            )}
 
           </div>
 
-        )}
+        </div>,
 
-      </section>
+        document.body
+      )}
 
       <style jsx>{`
     .waitlist{
@@ -733,9 +761,11 @@ p{
 
   inset:0;
 
-  background:rgba(15,23,42,.45);
+  background:rgba(8, 15, 30, 0.7);
 
-  backdrop-filter:blur(10px);
+  backdrop-filter:blur(12px);
+
+  -webkit-backdrop-filter:blur(12px);
 
   display:flex;
 
@@ -743,7 +773,7 @@ p{
 
   align-items:center;
 
-  z-index:999;
+  z-index:2000;
 
   animation:fade .25s ease forwards;
 
