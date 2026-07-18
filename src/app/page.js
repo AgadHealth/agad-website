@@ -73,7 +73,7 @@ export default function Home() {
               </div>
 
               <h1 className="hero-headline">
-                Your Doctor,<br />On Demand.
+                Your Health,<br />On Demand.
               </h1>
 
               {/* CTAs — outline ghost + solid filled (like Fintpay "Explore APIs" + "Get in Touch") */}
